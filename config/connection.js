@@ -1,6 +1,8 @@
+// import sequelize
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
+// establishing database connection with provided creds
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
