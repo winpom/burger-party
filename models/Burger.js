@@ -1,25 +1,29 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-// Burger model
+// burger model
 class Burger extends Model {}
 
 Burger.init(
     {
+        // column for burger id
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
+        // column for burger name
         burger_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
+        // column for burger total cost
         total_cost: {
             type: DataTypes.DECIMAL,
             allowNull: true
         },
+        // column for user id
         user_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -27,10 +31,11 @@ Burger.init(
                 key: "id",
             },
         },
+        // column for restaurant id
         restaurant_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: "restaurant",
+                model: "burger",
                 key: "id",
             },
         },
@@ -40,8 +45,8 @@ Burger.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "restaurant"
+    modelName: "burger"
     }
 );
 
-module.exports = Restaurant;
+module.exports = Burger;

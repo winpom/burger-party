@@ -1,38 +1,39 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Trip extends Model { }
+// user model
+class User extends Model { }
 
-Trip.init(
+User.init(
     {
+        // column for id
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
         },
-        trip_budget: {
-            type: DataTypes.DECIMAL(8, 2),
-            allowNull: false,
-            isDecimal: true
-        },
-        traveller_amount: {
-            type: DataTypes.INTEGER,
+        // column for username
+        username: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        traveller_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'traveller',
-                key: 'id',
-            },
+        // column for email
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true
+            }
         },
-        location_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'location',
-                key: 'id',
-            },
+        // column for user password
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [8]
+            }
         },
     },
     {
@@ -40,8 +41,8 @@ Trip.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'trip',
+        modelName: "user",
     }
 );
 
-module.exports = Trip;
+module.exports = User;
