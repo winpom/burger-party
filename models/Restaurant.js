@@ -14,7 +14,7 @@ Restaurant.init(
             autoIncrement: true
         // column for restaurant name
         },
-        burger_name: {
+        restaurant_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -22,7 +22,16 @@ Restaurant.init(
         location_name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        average_review: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+        },
+        average_meal_price: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
         }
+        // photos??
     },
     {
     sequelize,
