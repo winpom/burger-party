@@ -18,6 +18,12 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        // column for bio
+        bio: {
+            type: DataTypes.STRING,
+            allowNull: false,
+
+        },
         // column for email
         email: {
             type: DataTypes.STRING,
