@@ -1,17 +1,62 @@
 [
   {
-    "location_name": "London"
+    "burger_name": "Bay Area Burger #1",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
   },
   {
-    "location_name": "Paris"
+    "burger_name": "Bay Area Burger #2",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
   },
   {
-    "location_name": "Pismo Beach"
+    "burger_name": "Bay Area Burger #3",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
   },
   {
-    "location_name": "Miami"
+    "burger_name": "Bay Area Burger #4",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
   },
   {
-    "location_name": "Austin"
+    "burger_name": "Bay Area Burger #5",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
+  },
+  {
+    "burger_name": "Bay Area Burger #6",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
+  },
+  {
+    "burger_name": "Bay Area Burger #7",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
+  },
+  {
+    "burger_name": "Bay Area Burger #8",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
+  },
+  {
+    "burger_name": "Bay Area Burger #9",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
+  },
+  {
+    "burger_name": "Bay Area Burger #10",
+    "total_cost": "$20.43",
+    "user_id":
+    "restaurant_id":
   }
 ]
