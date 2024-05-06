@@ -1,0 +1,62 @@
+[
+    {
+        "username": "Nick",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber1@gmail.com",
+        "password": "userpassword1"
+    },
+    {
+        "username": "Win",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber2@gmail.com",
+        "password": "userpassword2"
+    },
+    {
+        "username": "Edwin",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber3@gmail.com",
+        "password": "userpassword3"
+    },
+    {
+        "username": "Tapia",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber4@gmail.com",
+        "password": "userpassword4"
+    },
+    {
+        "username": "user5",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber5@gmail.com",
+        "password": "userpassword5"
+    },
+    {
+        "username": "user6",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber6@gmail.com",
+        "password": "userpassword6"
+    },
+    {
+        "username": "user7",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber7@gmail.com",
+        "password": "userpassword7"
+    },
+    {
+        "username": "user8",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber8@gmail.com",
+        "password": "userpassword8"
+    },
+    {
+        "username": "user9",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber9@gmail.com",
+        "password": "userpassword9"
+    },
+    {
+        "username": "user10",
+        "bio": "I'm a current student at UC Berkeley and Module 14 sucks ass",
+        "email": "usernumber10@gmail.com",
+        "password": "userpassword10"
+    }
+]
