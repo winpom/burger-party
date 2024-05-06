@@ -1,87 +1,44 @@
-const router = require('express').Router();
-const { Trip, Location, Traveller } = require('../../models');
+const express = require('express');
+const { Review } = require('../../models'); 
+const router = express.Router();
 
-// The `/api/trips` endpoint
-
-// find all trips
-router.get('/', async (req, res) => {
-    try {
-        const tripData = await Trip.findAll({
-            include: [{ model: Location }],
-        });
-        res.status(200).json(tripData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// find a single trip by its `id`
-router.get('/:id', async (req, res) => {
-    try {
-        const tripData = await Trip.findByPk(req.params.id, {
-            include: [{ model: Location }],
-        });
-        if (!tripData) {
-            res.status(404).json({ message: 'No trip found with that id!' });
-            return;
-        }
-        res.status(200).json(tripData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// create a new trip
+// Create a new review
 router.post('/', async (req, res) => {
-    try {
-        const tripData = await Trip.create({
-            trip_budget: req.body.trip_budget,
-            traveller_amount: req.body.traveller_amount,
-            traveller_id: req.body.traveller_id,
-            location_id: req.body.location_id,
-        });
-        res.status(200).json(tripData);
-    } catch (err) {
-        res.status(400).json(err);
-    }
+  try {
+    // Create a new review with the provided title, content, and associated restaurant ID
+    const newReview = await Review.create({
+      title: req.body.title,
+      review_content: req.body.review_content,
+      restaurant_id: req.body.restaurant_id,
+      burger_id: req.body.burger_id, 
+      user_id: req.session.user_id,
+    });
+    
+    res.status(200).json(newReview);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
-// update a trip's name by its `id` value
-router.put('/:id', async (req, res) => {
-    try {
-        const tripData = await Trip.update(req.body, {
-            where: {
-                id: req.params.id,
-            },
-        });
-        if (!tripData[0]) {
-            res.status(404).json({ message: 'No trip with this id!' });
-            return;
-        }
-        res.status(200).json(tripData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// delete on trip by its `id` value
+// Delete a review
 router.delete('/:id', async (req, res) => {
-    try {
-        const tripData = await Trip.destroy({
-            where: {
-                id: req.params.id,
-            },
-        });
+  try {
+    // Find the review by its ID
+    const review = await Review.findByPk(req.params.id);
 
-        if (!tripData) {
-            res.status(404).json({ message: 'No trip found with that id!' });
-            return;
-        }
-
-        res.status(200).json(tripData);
-    } catch (err) {
-        res.status(500).json(err);
+    if (!review) {
+      res.status(404).json({ message: 'Review not found' });
+      return;
     }
+
+    // Delete the review
+    await review.destroy();
+    res.status(200).json({ message: 'Review deleted successfully' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
