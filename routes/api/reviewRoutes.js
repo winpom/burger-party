@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Review } = require('../../models');
+const { Review, Restaurant, Burger, User } = require('../../models');
 
 // Create a new review
 router.review('/', async (req, res) => {
@@ -7,7 +7,7 @@ router.review('/', async (req, res) => {
     const newReview = await Review.create({
       title: req.body.title,
       content: req.body.content,
-      user_id: req.session.user_id,
+      restaurant_id: req.session.restaurant_id,
     });
     
     res.status(200).json(newReview);
