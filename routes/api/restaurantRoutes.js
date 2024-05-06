@@ -1,84 +1,85 @@
 const router = require('express').Router();
-const { Trip, Location, Traveller } = require('../../models');
+const { Restaurant, Burger, Review } = require('../../models');
 
-// The `/api/locations` endpoint
 
-// find all locations
+// The `/api/restaurants` endpoint
+
+// find all restaurants
 router.get('/', async (req, res) => {
   try {
-    const locationData = await Location.findAll({
-      include: [{ model: Location, through: Trip }],
+    const restaurantData = await Restaurant.findAll({
+      include: [{ model: Restaurant, through: Burger }],
     });
-    res.status(200).json(locationData);
+    res.status(200).json(restaurantData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// find a single location by its `id`
+// find a single restaurant by its `id`
 router.get('/:id', async (req, res) => {
   try {
-    const locationData = await Location.findByPk(req.params.id, {
-      include: [{ model: Trip }],
+    const restaurantData = await Restaurant.findByPk(req.params.id, {
+      include: [{ model: Burger }],
     });
-    if (!locationData) {
-      res.status(404).json({ message: 'No location found with that id!' });
+    if (!restaurantData) {
+      res.status(404).json({ message: 'No restaurant found with that id!' });
       return;
     }
-    res.status(200).json(locationData);
+    res.status(200).json(restaurantData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// create a new location
+// create a new restaurant
 router.post('/', async (req, res) => {
   try {
-    const locationData = await Location.create({
-    location_name: req.body.location_name,
+    const restaurantData = await Restaurant.create({
+    restaurant_name: req.body.restaurant_name,
     });
-    res.status(200).json(locationData);
+    res.status(200).json(restaurantData);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-// update a location's name by its `id` value
-router.put('/:id', async (req, res) => {
-  try {
-    const locationData = await Location.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!locationData[0]) {
-      res.status(404).json({ message: 'No location with this id!' });
-      return;
-    }
-    res.status(200).json(locationData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// update a restaurant's name by its `id` value (not updating restaurants...right?)
+// router.put('/:id', async (req, res) => {
+//   try {
+//     const restaurantData = await Restaurant.update(req.body, {
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     if (!restaurantData[0]) {
+//       res.status(404).json({ message: 'No restaurant with this id!' });
+//       return;
+//     }
+//     res.status(200).json(restaurantData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-// delete on location by its `id` value
-router.delete('/:id', async (req, res) => {
-  try {
-    const locationData = await Location.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
+// delete on restaurant by its `id` value (not deleting restaurants)
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const restaurantData = await Restaurant.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
 
-    if (!locationData) {
-      res.status(404).json({ message: 'No location found with that id!' });
-      return;
-    }
+//     if (!restaurantData) {
+//       res.status(404).json({ message: 'No restaurant found with that id!' });
+//       return;
+//     }
 
-    res.status(200).json(locationData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(restaurantData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 module.exports = router;
