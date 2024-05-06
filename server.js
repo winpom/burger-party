@@ -8,6 +8,24 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
+const multer = require('multer'); // Require Multer
+
+// Configure disk storage for multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Specify the directory where files will be stored
+  },
+  filename: function (req, file, cb) {
+    const filename = req.body.id + '-' + Date.now() + '-' + file.originalname;
+    cb(null, filename);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// Add the Multer middleware to handle file uploads
+app.use(upload.single('image')); // Assuming 'image' is the name of the input field for uploading images - need to confirm
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -24,9 +42,9 @@ app.use(session({
 // middleware checking if user is authenticated
 function requireAuth(req, res, next) {
   if (req.session.authenticated) {
-      next();
+    next();
   } else {
-      res.status(401).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 };
 
@@ -35,10 +53,10 @@ app.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   if (username === "user" && password === "password") {
-      req.session.authenticated = true;
-      res.send("Login successful");
+    req.session.authenticated = true;
+    res.send("Login successful");
   } else {
-      res.status(401).send("Invalid username or password");
+    res.status(401).send("Invalid username or password");
   }
 });
 
@@ -49,7 +67,9 @@ app.get("/protected-route", requireAuth, (req, res) => {
 
 const sess = {
   secret: "iliketequila",
-  cookie: {},
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // expires after 1 day
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
