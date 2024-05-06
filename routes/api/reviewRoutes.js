@@ -1,13 +1,17 @@
-const router = require('express').Router();
-const { Review, Restaurant, Burger, User } = require('../../models');
+const express = require('express');
+const { Review } = require('../../models'); 
+const router = express.Router();
 
 // Create a new review
-router.review('/', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
+    // Create a new review with the provided title, content, and associated restaurant ID
     const newReview = await Review.create({
       title: req.body.title,
-      content: req.body.content,
-      restaurant_id: req.session.restaurant_id,
+      review_content: req.body.review_content,
+      restaurant_id: req.body.restaurant_id,
+      burger_id: req.body.burger_id, 
+      user_id: req.session.user_id,
     });
     
     res.status(200).json(newReview);
@@ -20,6 +24,7 @@ router.review('/', async (req, res) => {
 // Delete a review
 router.delete('/:id', async (req, res) => {
   try {
+    // Find the review by its ID
     const review = await Review.findByPk(req.params.id);
 
     if (!review) {
@@ -27,6 +32,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
+    // Delete the review
     await review.destroy();
     res.status(200).json({ message: 'Review deleted successfully' });
   } catch (err) {
@@ -34,26 +40,5 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// Update a review - presently not including
-// router.put('/:id', async (req, res) => {
-//   try {
-//     const review = await Review.findByPk(req.params.id);
-
-//     if (!review) {
-//       res.status(404).json({ message: 'Review not found' });
-//       return;
-//     }
-
-//     review.title = req.body.title;
-//     review.content = req.body.content;
-//     await review.save(); // Save the changes
-
-//     res.status(200).json({ message: 'Review updated successfully', updatedReview: review });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
 module.exports = router;
