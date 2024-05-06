@@ -1,14 +1,62 @@
 [
   {
-    "name": "Sal",
-    "email": "sal@hotmail.com"
+    "restaurant_name": "A+ Burger",
+    "location_name": "Oakland",
+    "average_review": 4.4,
+    "average_meal_price": 15.58
   },
   {
-    "name": "Lernantino",
-    "email": "lernantino@gmail.com"
+    "restaurant_name": "TrueBurger",
+    "location_name": "Oakland",
+    "average_review": 4.1,
+    "average_meal_price": 13.07
   },
   {
-    "name": "Amiko",
-    "email": "amiko2k20@aol.com"
+    "restaurant_name": "Sideshow Kitchen",
+    "location_name": "Oakland",
+    "average_review": 4.4,
+    "average_meal_price": 17.50
+  },
+  {
+    "restaurant_name": "Flipside",
+    "location_name": "Oakland",
+    "average_review": 4.0,
+    "average_meal_price": 10.21
+  },
+  {
+    "restaurant_name": "Big Mouth Burgers",
+    "location_name": "San Francisco",
+    "average_review": 3.8,
+    "average_meal_price": 8.97
+  },
+  {
+    "restaurant_name": "Super Duper Burgers",
+    "location_name": "San Francisco",
+    "average_review": 4.0,
+    "average_meal_price": 12.88
+  },
+  {
+    "restaurant_name": "CaliKid Burgers N Shakes",
+    "location_name": "Livermore",
+    "average_review": 4.6,
+    "average_meal_price": 18.46
+  },
+  {
+    "restaurant_name": "Hidden Spot",
+    "location_name": "San Francisco",
+    "average_review": 4.7,
+    "average_meal_price": 9.94
+  },
+  {
+    "restaurant_name": "McDonald's",
+    "location_name": "San Francisco",
+    "average_review": 0.1,
+    "average_meal_price": 1.00
+  },
+  {
+    "restaurant_name": "Columbus Burgers",
+    "location_name": "San Francisco",
+    "average_review": 4.7,
+    "average_meal_price": 15.51
   }
 ]
