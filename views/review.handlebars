@@ -1,12 +1,50 @@
-<div class="dish-card">
-  <div class="dish-card-header">
-    {{dish_name}}
-  </div>
-  <div class="card-body">
-    <!-- We render the description below, using a Handlebars.js expression. -->
-    <p>
-      Description:
-      {{description}}
-    </p>
-  </div>
+<div class="card">
+    <h3 class="card-header">Write a review</h3>
+    <h4 class="rating">How would you rate your burger?</h4>
+    <div id="rating">
+        <input type="radio" name="rating" value="1" id="1star" class="radio-circle visually-hidden">
+        <label for="1star" class="star-label">1</label>
+        <input type="radio" name="rating" value="2" id="2stars" class="radio-circle visually-hidden">
+        <label for="2stars" class="star-label">2</label>
+        <input type="radio" name="rating" value="3" id="3stars" class="radio-circle visually-hidden">
+        <label for="3stars" class="star-label">3</label>
+        <input type="radio" name="rating" value="4" id="4stars" class="radio-circle visually-hidden">
+        <label for="4stars" class="star-label">4</label>
+        <input type="radio" name="rating" value="5" id="5stars" class="radio-circle visually-hidden">
+        <label for="5stars" class="star-label">5</label>
+    </div>
+    <form class="card-body new-review-form" id="new-review-form">
+
+        <label for="restaurant" class="form-label">Restaurants</label>
+        <input type="text" id="restaurant" name="restaurant_name" class="form-input" />
+
+        <label for="burger" class="form-label">Burger Name</label>
+        <input type="text" id="burger" name="burger_name" class="form-input"/>
+
+        <label class="form-label" for="review">Review</label>
+        <textarea id="review" name="review" class="form-input" />
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="image">
+          <button type="submit">Upload Burger Image</button>
+        </form>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
 </div>
+
+<script src="../public/js/addReview.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
