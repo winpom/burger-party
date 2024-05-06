@@ -8,6 +8,7 @@ router.post('/', async (req, res) => {
     // Create a new review with the provided title, content, and associated restaurant ID
     const newReview = await Review.create({
       title: req.body.title,
+      review_star: req.body.review_star,
       review_content: req.body.review_content,
       restaurant_id: req.body.restaurant_id,
       burger_id: req.body.burger_id, 
