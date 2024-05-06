@@ -1,19 +1,4 @@
-const Location = require('./Location');
-const Traveller = require('./Traveller');
-const Trip = require('./Trip');
-
-Traveller.belongsToMany(Location, {
-    through: {
-        model: Trip,
-        unique: false
-    },
-});
-
-Location.belongsToMany(Traveller, {
-    through: {
-        model: Trip,
-        unique: false
-    },
-});
-
-module.exports = { Location, Traveller, Trip };
+const Burger = require("./Burger");
+const Restaurant = require("./Restaurant");
+const Review = require("./Review");
+const User = require("./User");
