@@ -1,85 +1,90 @@
-const router = require('express').Router();
-const { Trip, Location, Traveller } = require('../../models');
+const express = require('express');
+const { Burger, Restaurant, Review } = require('../../models');
+const router = express.Router();
 
-// The `/api/travellers` endpoint
-
-// find all travellers
+// Route to find all burgers
 router.get('/', async (req, res) => {
   try {
-    const travellerData = await Traveller.findAll({
-      include: [{ model: Location, through: Trip }],
+    // Fetch all burgers from the database, including associated restaurants and reviews
+    const burgerData = await Burger.findAll({
+      include: [{ model: Restaurant }, { model: Review }],
     });
-    res.status(200).json(travellerData);
+    
+    res.status(200).json(burgerData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// find a single traveller by its `id`
+// Route to find a single burger by its `id`
 router.get('/:id', async (req, res) => {
   try {
-    const travellerData = await Traveller.findByPk(req.params.id, {
-      include: [{ model: Location, through: Trip }],
+    // Fetch the burger data by its ID, including associated restaurants and reviews
+    const burgerData = await Burger.findByPk(req.params.id, {
+      include: [{ model: Restaurant }, { model: Review }],
     });
-    if (!travellerData) {
-      res.status(404).json({ message: 'No traveller found with that id!' });
+
+    if (!burgerData) {
+      res.status(404).json({ message: 'No burger found with that id!' });
       return;
     }
-    res.status(200).json(travellerData);
+
+    res.status(200).json(burgerData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// create a new traveller
+// Route to create a new burger
 router.post('/', async (req, res) => {
   try {
-    const travellerData = await Traveller.create({
+    // Create a new burger with the provided name and cost
+    const burgerData = await Burger.create({
         name: req.body.name,
-        email: req.body.email
+        cost: req.body.total_cost
     });
-    res.status(200).json(travellerData);
+    res.status(200).json(burgerData);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-// update a traveller's name by its `id` value
-router.put('/:id', async (req, res) => {
-  try {
-    const travellerData = await Traveller.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!travellerData[0]) {
-      res.status(404).json({ message: 'No traveller with this id!' });
-      return;
-    }
-    res.status(200).json(travellerData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// update a burger's name by its `id` value (not updating)
+// router.put('/:id', async (req, res) => {
+//   try {
+//     const burgerData = await Burger.update(req.body, {
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     if (!burgerData[0]) {
+//       res.status(404).json({ message: 'No burger with this id!' });
+//       return;
+//     }
+//     res.status(200).json(burgerData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-// delete on traveller by its `id` value
-router.delete('/:id', async (req, res) => {
-  try {
-    const travellerData = await Traveller.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
+// delete on burger by its `id` value (not deleting)
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const burgerData = await Burger.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
 
-    if (!travellerData) {
-      res.status(404).json({ message: 'No traveller found with that id!' });
-      return;
-    }
+//     if (!burgerData) {
+//       res.status(404).json({ message: 'No burger found with that id!' });
+//       return;
+//     }
 
-    res.status(200).json(travellerData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(burgerData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 module.exports = router;
