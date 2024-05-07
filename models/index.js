@@ -3,15 +3,6 @@ const Restaurant = require('./Restaurant');
 const Review = require('./Review');
 const User = require('./User');
 
-
-// User.hasMany(Review)
-// Review.belongsTo(User)
-// Burger.belongsTo(Restaurant)
-// Burger.hasMany(Review)
-// Restaurant.hasMany(Burger)
-// Review.hasOne(Burger)
-// Restaurant.hasMany(Review)
-
 User.hasMany(Review,{
     foreignKey: 'user_id',
     onDelete:'CASCADE'
@@ -32,6 +23,10 @@ Restaurant.hasMany(Burger,{
 Review.hasOne(Burger,{
     foreignKey:'burger_id',
 });
+// Restaurant.hasMany(Review,{
+//     foreignKey:'review_id',
+//     onDelete:'CASCADE'
+// });
 
 
 
