@@ -16,8 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-<<<<<<< HEAD
-=======
 // setup express-session middleware
 app.use(session({
   secret: "helloworld",
@@ -51,7 +49,6 @@ app.get("/protected-route", requireAuth, (req, res) => {
   res.send("This is a protected route");
 });
 
->>>>>>> 8b6cc99739650d8f4a54a312530581688efa6dba
 // session config
 const sess = {
   secret: 'Super secret secret',
