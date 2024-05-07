@@ -2,61 +2,61 @@
   {
     "burger_name": "Bay Area Burger #1",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 1,
+    "restaurant_id": 1
   },
   {
     "burger_name": "Bay Area Burger #2",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 2,
+    "restaurant_id": 2
   },
   {
     "burger_name": "Bay Area Burger #3",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 3,
+    "restaurant_id": 3
   },
   {
     "burger_name": "Bay Area Burger #4",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 4,
+    "restaurant_id": 4
   },
   {
     "burger_name": "Bay Area Burger #5",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 5,
+    "restaurant_id": 5
   },
   {
     "burger_name": "Bay Area Burger #6",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 6,
+    "restaurant_id": 6
   },
   {
     "burger_name": "Bay Area Burger #7",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 7,
+    "restaurant_id": 7
   },
   {
     "burger_name": "Bay Area Burger #8",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 8,
+    "restaurant_id": 8
   },
   {
     "burger_name": "Bay Area Burger #9",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 9,
+    "restaurant_id": 9
   },
   {
     "burger_name": "Bay Area Burger #10",
     "total_cost": "$20.43",
-    "user_id":
-    "restaurant_id":
+    "user_id": 10,
+    "restaurant_id": 10
   }
 ]
