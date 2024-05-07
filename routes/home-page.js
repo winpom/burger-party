@@ -17,22 +17,22 @@ router.get('/login', (req, res) => {
 // Route to fetch all reviews with associated review, review, and restaurant
 router.get('/', async (req, res) => {
   try {
-    // Check if the review is logged in
-    const loggedIn = req.session.loggedIn;
+    // // Check if the review is logged in
+    // const loggedIn = req.session.loggedIn;
 
-    // Fetch all reviews from the database, including associated review and review with their restaurant
-    const reviewData = await Review.findAll({
-      include: [
-        { model: Review }, // Include the review who wrote the review
-        { model: Review, include: [{ model: Restaurant }] } // Include the review being reviewed and its associated restaurant
-      ]
-    });
+    // // Fetch all reviews from the database, including associated review and review with their restaurant
+    // const reviewData = await Review.findAll({
+    //   include: [
+    //     { model: Review }, // Include the review who wrote the review
+    //     { model: Review, include: [{ model: Restaurant }] } // Include the review being reviewed and its associated restaurant
+    //   ]
+    // });
 
-    // Map the fetched data to plain JavaScript objects
-    const reviews = reviewData.map((review) => review.get({ plain: true }));
+    // // Map the fetched data to plain JavaScript objects
+    // const reviews = reviewData.map((review) => review.get({ plain: true }));
 
     // Render the homepage template with the fetched reviews and login status
-    res.render('homepage', { loggedIn, reviews });
+    res.render('homepage');
   } catch (err) {
     // Handle any errors that occur during the process
     console.log(err);
