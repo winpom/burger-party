@@ -67,15 +67,11 @@ app.get("/protected-route", requireAuth, (req, res) => {
   res.send("This is a protected route");
 });
 
-const sess = {
-  secret: "iliketequila",
-  cookie: {
-    maxAge: 24 * 60 * 60 * 1000, // expires after 1 day
 // session config
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 60 * 60 * 1000
+    maxAge: 60 * 60 * 1000 // expires after 1 day
   },
   resave: false,
   saveUninitialized: true,
