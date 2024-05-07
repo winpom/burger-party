@@ -1,14 +1,17 @@
-const express = require('express');
-const routes = require('./routes');
-const sequelize = require('./config/connection');
 const path = require('path');
-const helpers = require('./utils/helpers');
+const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const exphbs = require('express-handlebars');
+const multer = require('multer');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const multer = require('multer'); // Require Multer
+const routes = require('./routes');
+const dashboardRoutes = require('./routes/dashboard-page'); 
+const sequelize = require('./config/connection');
+const helpers = require('./utils/helpers');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Configure disk storage for multer
 const storage = multer.diskStorage({
@@ -26,8 +29,7 @@ const upload = multer({ storage: storage });
 // Add the Multer middleware to handle file uploads
 app.use(upload.single('image')); // Assuming 'image' is the name of the input field for uploading images - need to confirm
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+
 
 // middleware
 app.use(express.json());
@@ -87,6 +89,12 @@ const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
+
+// Mount Dashboard Routes
+app.use('/dashboard', dashboardRoutes);
+
+// Mount Other Routes
+app.use(routes);
 
 // sync database and server start
 sequelize.sync({ force: false }).then(() => {

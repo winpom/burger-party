@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
 // review model
-class Review extends Model {}
+class Review extends Model { }
 
 Review.init(
     {
@@ -19,6 +19,20 @@ Review.init(
             allowNull: false,
             references: {
                 model: "user",
+                key: "id"
+            }
+        },
+        // column for rating
+        rating: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        // column for restaurant id
+        restaurant_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "restaurant",
                 key: "id"
             }
         },
@@ -40,13 +54,13 @@ Review.init(
             }
         }
     },
-        
+
     {
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "review"
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: "review"
     }
 );
 

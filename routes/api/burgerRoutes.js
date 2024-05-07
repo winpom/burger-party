@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
     // Fetch all burgers from the database, including associated restaurants and reviews
     const burgerData = await Burger.findAll({
-      include: [{ model: Restaurant }, { model: Review }],
+      // include: [{ model: Restaurant }, { model: Review }],
     });
     
     res.status(200).json(burgerData);
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
   try {
     // Fetch the burger data by its ID, including associated restaurants and reviews
     const burgerData = await Burger.findByPk(req.params.id, {
-      include: [{ model: Restaurant }, { model: Review }],
+      // include: [{ model: Restaurant }, { model: Review }],
     });
 
     if (!burgerData) {
@@ -40,8 +40,9 @@ router.post('/', async (req, res) => {
   try {
     // Create a new burger with the provided name and cost
     const burgerData = await Burger.create({
-        name: req.body.name,
-        cost: req.body.total_cost
+        burger_name: req.body.burger_name,
+        total_cost: req.body.total_cost,
+        restaurant_id: req.body.restaurant_id
     });
     res.status(200).json(burgerData);
   } catch (err) {
