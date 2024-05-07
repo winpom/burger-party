@@ -1,6 +1,7 @@
 {{!-- this is the main html layout --}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,28 +11,29 @@
 
 <body>
   <div class="wrapper">
-      <header class="hero">
-          <div>
-            <nav class"nav">
-                    <a class="link" href="/">Home</a>
-                    <a class="link" href="/write_review">Write a Review</a>
-                    {{#if loggedIn}}
-                    <a class="link" href="/" id="logout">Logout</a>
-                    {{else}}
-                    <a class="link" href="/login">Login</a>
-                    {{/if}}
-                </nav>          
-          </div>  
-      </header>
+    <header class="hero">
+      <div>
+        <nav class"nav">
+          <a class="link" href="/">Home</a>
+          <a class="link" href="/write-review">Write a Review</a>
+          {{#if loggedIn}}
+          <a class="link" href="/" id="logout">Logout</a>
+          {{else}}
+          <a class="link" href="/login">Login</a>
+          {{/if}}
+        </nav>
+      </div>
+    </header>
 
     <main>
       {{{ body }}}
     </main>
+    <script src="/js/form.js"></script>
   </div>
 
-    {{#if loggedIn}}
-    <script src="../../public/js/logout.js"></script>
-    {{/if}}
+  {{#if loggedIn}}
+  <script src="../../public/js/logout.js"></script>
+  {{/if}}
 
 </body>
 

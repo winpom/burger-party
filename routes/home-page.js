@@ -40,6 +40,18 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Route to write-review page
+router.get('/write-review', async (req, res) => {
+  try {
+    res.render('write-review');
+  } catch (err) {
+    // Handle any errors that occur during the process
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
 // Route to fetch a single review by ID with associated review, review, and restaurant
 router.get('/review/:id', async (req, res) => {
   try {

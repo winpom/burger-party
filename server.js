@@ -29,8 +29,6 @@ const upload = multer({ storage: storage });
 // Add the Multer middleware to handle file uploads
 app.use(upload.single('image')); // Assuming 'image' is the name of the input field for uploading images - need to confirm
 
-
-
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

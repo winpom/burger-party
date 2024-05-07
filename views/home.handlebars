@@ -1,0 +1,11 @@
+{{!-- this is the the page the user will see when they first come to read the reviews --}}
+<div class="reviews">
+  {{#each reviews as |review|}}
+  {{> review-details}}
+  {{/each}}
+</div>
+<div class="restaurants">
+  {{#each restaurants as |restaurant|}}
+  {{> restaurant-details}}
+  {{/each}}
+</div>
