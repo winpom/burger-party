@@ -23,7 +23,6 @@ User.init(
         bio: {
             type: DataTypes.STRING,
             allowNull: false,
-
         },
         // column for email
         email: {
