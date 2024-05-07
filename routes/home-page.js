@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
     // const reviews = reviewData.map((review) => review.get({ plain: true }));
 
     // Render the homepage template with the fetched reviews and login status
-    res.render('homepage');
+    res.render('home');
   } catch (err) {
     // Handle any errors that occur during the process
     console.log(err);
