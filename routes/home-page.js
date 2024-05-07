@@ -2,17 +2,29 @@ const express = require('express');
 const { User, Review, Restaurant, Burger } = require('../models');
 const router = express.Router();
 
-// Route to fetch all reviews with associated user, burger, and restaurant
+// Route to render the login page
+router.get('/login', (req, res) => {
+  // If the user is already logged in, redirect to the homepage
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  // If not logged in, render the login page with loggedIn set to false
+  res.render('login', { loggedIn: false });
+});
+
+// Route to fetch all reviews with associated review, review, and restaurant
 router.get('/', async (req, res) => {
   try {
-    // Check if the user is logged in
+    // Check if the review is logged in
     const loggedIn = req.session.loggedIn;
 
-    // Fetch all reviews from the database, including associated user and burger with their restaurant
+    // Fetch all reviews from the database, including associated review and review with their restaurant
     const reviewData = await Review.findAll({
       include: [
-        { model: User }, // Include the user who wrote the review
-        { model: Burger, include: [{ model: Restaurant }] } // Include the burger being reviewed and its associated restaurant
+        { model: Review }, // Include the review who wrote the review
+        { model: Review, include: [{ model: Restaurant }] } // Include the review being reviewed and its associated restaurant
       ]
     });
 
@@ -28,29 +40,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route to render the login page
-router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect to the homepage
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-
-  // If not logged in, render the login page with loggedIn set to false
-  res.render('login', { loggedIn: false });
-});
-
-// Route to fetch a single review by ID with associated user, burger, and restaurant
+// Route to fetch a single review by ID with associated review, review, and restaurant
 router.get('/review/:id', async (req, res) => {
   try {
     // Extract the review ID from the request parameters
     const reviewId = req.params.id;
 
-    // Find the review by its ID, including associated user, burger, and restaurant
+    // Find the review by its ID, including associated review, review, and restaurant
     const reviewData = await Review.findByPk(reviewId, {
       include: [
-        { model: User }, // Include the user who wrote the review
-        { model: Burger, include: [{ model: Restaurant }] } // Include the burger being reviewed and its associated restaurant
+        { model: Review }, // Include the review who wrote the review
+        { model: Review, include: [{ model: Restaurant }] } // Include the review being reviewed and its associated restaurant
       ]
     });
 
@@ -64,13 +64,14 @@ router.get('/review/:id', async (req, res) => {
     const review = reviewData.get({ plain: true });
 
     // Render the review page with the fetched review data and login status
-    res.render('review', { review, loggedIn: req.session.loggedIn });
+    // res.render('review', { review, loggedIn: req.session.loggedIn });
   } catch (err) {
     // Handle any errors that occur during the process
     console.log(err);
     res.status(500).json({ error: 'Failed to retrieve review data' });
   }
 });
+
 
 // Export the router for use in other files
 module.exports = router;

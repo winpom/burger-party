@@ -1,45 +1,56 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/connection");
+const Review = require("./Review");
 
-// restautant model
-class Restaurant extends Model {}
+// Restaurant model
+class Restaurant extends Model {
+  // Method to calculate average meal price
+  static async calculateAverageMealPrice(restaurantId) {
+    const result = await Review.findOne({
+      attributes: [
+        [Sequelize.fn("avg", Sequelize.col("meal_price")), "average_meal_price"],
+      ],
+      where: { restaurant_id: restaurantId },
+    });
+    return result.get("average_meal_price") || 0;
+  }
+
+  // Method to calculate average review rating
+  static async calculateAverageReviewRating(restaurantId) {
+    const result = await Review.findOne({
+      attributes: [
+        [Sequelize.fn("avg", Sequelize.col("review_star")), "average_review_rating"],
+      ],
+      where: { restaurant_id: restaurantId },
+    });
+    return result.get("average_review_rating") || 0;
+  }
+}
 
 Restaurant.init(
-    {
-        // column for id
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
-        // column for restaurant name
-        },
-        restaurant_name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        // column for restaurant location name
-        location_name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        average_review: {
-            type: DataTypes.DECIMAL,
-            allowNull: false,
-        },
-        average_meal_price: {
-            type: DataTypes.DECIMAL,
-            allowNull: false,
-        },
-        // photos??
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
+    restaurant_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    location_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "restaurant"
-    }
+    modelName: "restaurant",
+  }
 );
 
 module.exports = Restaurant;

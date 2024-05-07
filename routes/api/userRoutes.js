@@ -6,6 +6,7 @@ router.post('/', async (req, res) => {
   try {
     const newUser = await User.create({
       username: req.body.username,
+      bio: req.body.bio,
       email: req.body.email,
       password: req.body.password
     });
@@ -17,6 +18,39 @@ router.post('/', async (req, res) => {
     });
   } catch (err) {
     console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+// Route to find all users
+router.get('/', async (req, res) => {
+  try {
+    // Fetch all users from the database,
+    const userData = await User.findAll({
+      // include: [{ model: Restaurant }, { model: Review }],
+    });
+    
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Route to find a single user by its `id`
+router.get('/:id', async (req, res) => {
+  try {
+    // Fetch the user data by its ID, including associated restaurants and reviews
+    const userData = await User.findByPk(req.params.id, {
+      // include: [{ model: Restaurant }, { model: Review }],
+    });
+
+    if (!userData) {
+      res.status(404).json({ message: 'No user found with that id!' });
+      return;
+    }
+
+    res.status(200).json(userData);
+  } catch (err) {
     res.status(500).json(err);
   }
 });
