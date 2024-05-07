@@ -12,7 +12,6 @@ const sequelize = process.env.DB_URL
   {
     host: 'localhost',
     dialect: 'postgres',
-    //added the db_port for the ones who use a different port number
     port: process.env.DB_PORT,
   }
 );

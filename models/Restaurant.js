@@ -30,7 +30,7 @@ Restaurant.init(
         average_meal_price: {
             type: DataTypes.DECIMAL,
             allowNull: false,
-        }
+        },
         // photos??
     },
     {

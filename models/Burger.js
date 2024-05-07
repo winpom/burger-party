@@ -24,13 +24,13 @@ Burger.init(
             allowNull: true
         },
         // column for user id
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: "user",
-                key: "id",
-            },
-        },
+        // user_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: "user",
+        //         key: "id",
+        //     },
+        // },
         // column for restaurant id
         restaurant_id: {
             type: DataTypes.INTEGER,
