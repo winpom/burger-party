@@ -1,9 +1,9 @@
 async function newFormHandler(event) {
     event.preventDefault();
-    const ratingStars = document.querySelector('#rating')
-    const restaurantName = document.querySelector('input[name="restaurant_name"]').value;
-    const burgerName = document.querySelector('input[name="burger_name"]').value;
-    const review = document.querySelector('textarea[name="review"]')
+    const ratingStars = document.querySelector('#rating').value.trim();
+    const restaurantName = document.querySelector('input[name="restaurant_name"]').value.trim();
+    const burgerName = document.querySelector('input[name="burger_name"]').value.trim();
+    const review = document.querySelector('textarea[name="review"]').value.trim();
   
     const response = await fetch(`/api/reviews`, {
       method: 'POST',

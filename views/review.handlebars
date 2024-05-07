@@ -1,3 +1,4 @@
+{{!-- this is the form that will be used when the user wants to add new review --}}
 <div class="card">
     <h3 class="card-header">Write a review</h3>
     <h4 class="rating">How would you rate your burger?</h4>
@@ -24,12 +25,11 @@
         <label class="form-label" for="review">Review</label>
         <textarea id="review" name="review" class="form-input" />
 
-        <form action="/upload" method="post" enctype="multipart/form-data">
-          <input type="file" name="image">
-          <button type="submit">Upload Burger Image</button>
-        </form>
-
         <button type="submit" class="btn">Submit</button>
+    </form>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <button type="submit">Upload Burger Image</button>
     </form>
 </div>
 

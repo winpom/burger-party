@@ -2,8 +2,8 @@ const express = require('express');
 const { Review } = require('../../models'); 
 const router = express.Router();
 
-// Create a new review
-router.post('/', async (req, res) => {
+// Create a new review with image upload
+router.post('/', upload.single('photo'), async (req, res) => {
   try {
     // Create a new review with the provided title, content, and associated restaurant ID
     const newReview = await Review.create({
@@ -13,6 +13,8 @@ router.post('/', async (req, res) => {
       restaurant_id: req.body.restaurant_id,
       burger_id: req.body.burger_id, 
       user_id: req.session.user_id,
+      // Add the filename of the uploaded image to the database
+      image: req.file.filename // Assuming the column name in the database is 'image' - we will need to confirm
     });
     
     res.status(200).json(newReview);
