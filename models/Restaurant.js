@@ -31,13 +31,6 @@ Restaurant.init(
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-                burger_id:{
-            type:DataTypes.INTEGER,
-            references:{
-                model:'burger',
-                key:'id',
-            }
-        },
         // photos??
     },
     {
