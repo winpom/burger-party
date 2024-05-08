@@ -1,5 +1,4 @@
 const averageRating = (ratings) => {
-    // console.log(ratings)
     let sumRating = 0;
     for (let i = 0; i < ratings.length; i++) {
         sumRating += ratings[i].rating

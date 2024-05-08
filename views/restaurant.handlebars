@@ -1,10 +1,9 @@
 <section class="restaurant">
-  <h1>{{restaurant_name}}</h1>
-  <p class="average-rating">Average Rating: {{rating}}</p>
-  <p class="average-cost">Average Price: ${{avgCost}}</p>
+  <h1>{{restaurant.restaurant_name}}</h1>
+  <p class="average-rating">Average Rating: {{restaurant.rating}}</p>
+  <p class="average-cost">Average Price: ${{restaurant.avgCost}}</p>
   <h3>Reviews:</h3>
   {{#each reviews}}
-    <p>{{user.username}}</p> 
     <p>{{review_content}}</p>
     <p>Rating: {{review_star}}</p>
   {{/each}}

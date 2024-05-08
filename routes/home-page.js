@@ -15,7 +15,7 @@ router.get('/login', (req, res) => {
   res.render('login', { loggedIn: false });
 });
 
-// Route to fetch all reviews with associated review, review, and restaurant
+// Route to fetch all reviews with associated users, burgers, and restaurant
 router.get('/', async (req, res) => {
   try {
 
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
     // Fetch all reviews from the database, including associated review and review with their restaurant
     const restaurantData = await Restaurant.findAll({
       include: [
-        { model: Burger }, { model: Review }
+        { model: Burger }, { model: Review }, 
       ]
     });
 
@@ -70,35 +70,72 @@ router.get('/write-review', async (req, res) => {
   }
 });
 
-// Route to fetch a single review by ID with associated review, review, and restaurant
-router.get('/review/:id', async (req, res) => {
+// Route to fetch all restaurants with associated burgers and reviews
+router.get('/restaurants', async (req, res) => {
   try {
-    // Extract the review ID from the request parameters
-    const reviewId = req.params.id;
-
-    // Find the review by its ID, including associated review, review, and restaurant
-    const reviewData = await Review.findByPk(reviewId, {
+    // Fetch all restaurants from the database, including associated burgers and reviews
+    const restaurantData = await Restaurant.findAll({
       include: [
-        { model: Review }, // Include the review who wrote the review
-        { model: Review, include: [{ model: Restaurant }] } // Include the review being reviewed and its associated restaurant
+        { model: Burger },
+        { model: Review, include: [{ model: User }] } // Include the associated User model for each Review
       ]
     });
+    
+    // Map the fetched data to plain JavaScript objects
+    const restaurants = restaurantData.map((restaurant) => restaurant.get({ plain: true }));
 
-    // If the review is not found, return a 404 error
-    if (!reviewData) {
-      res.status(404).json({ error: 'Review not found' });
-      return;
-    }
+    // Calculate the average rating and cost for each restaurant
+    restaurants.forEach((restaurant) => {
+      const averageRating = averageRating(restaurant.reviews);
+      const averageCost = averageCost(restaurant.burgers);
+      restaurant.rating = averageRating.toFixed(2);
+      restaurant.avgCost = averageCost.toFixed(2);
+    });
 
-    // Convert the fetched review data to a plain JavaScript object
-    const review = reviewData.get({ plain: true });
-
-    // Render the review page with the fetched review data and login status
-    // res.render('review', { review, loggedIn: req.session.loggedIn });
+    // Render the restaurants page template with the fetched restaurant data
+    res.render('restaurants', { restaurants });
   } catch (err) {
     // Handle any errors that occur during the process
     console.log(err);
-    res.status(500).json({ error: 'Failed to retrieve review data' });
+    res.status(500).json(err);
+  }
+});
+
+
+// Route to fetch all reviews and burgers specific to a restaurant
+router.get('/restaurant/:id', async (req, res) => {
+  try {
+    const restaurantId = req.params.id;
+
+    // Fetch the restaurant by its ID, including associated burgers and reviews
+    const restaurantData = await Restaurant.findByPk(restaurantId, {
+      include: [
+        { model: Burger },
+        { model: Review, include: [{ model: User }] } // Include the associated User model for each Review
+      ]
+    });
+    
+    if (!restaurantData) {
+      // If the restaurant doesn't exist, return a 404 error
+      res.status(404).json({ message: 'Restaurant not found' });
+      return;
+    }
+
+    // Map the fetched data to a plain JavaScript object
+    const restaurant = restaurantData.get({ plain: true });
+
+    // Calculate the average rating and cost for the restaurant
+    const averageRating = averageRating(restaurant.reviews);
+    const averageCost = averageCost(restaurant.burgers);
+    restaurant.rating = averageRating.toFixed(2);
+    restaurant.avgCost = averageCost.toFixed(2);
+
+    // Render the restaurant page template with the fetched restaurant data
+    res.render('restaurant', { restaurant });
+  } catch (err) {
+    // Handle any errors that occur during the process
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
