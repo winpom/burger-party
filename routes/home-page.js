@@ -23,8 +23,8 @@ router.get('/', async (req, res) => {
     // Fetch all reviews from the database, including associated review and review with their restaurant
     const reviewData = await Review.findAll({
       include: [
-        { model: Review }, // Include the review who wrote the review
-        { model: Review, include: [{ model: Restaurant }] } // Include the review being reviewed and its associated restaurant
+        { model: User }, // Include the review who wrote the review
+        { model: Restaurant, include: [{ model: Burger }] } // Include the review being reviewed and its associated restaurant
       ]
     });
 
@@ -32,13 +32,25 @@ router.get('/', async (req, res) => {
     const reviews = reviewData.map((review) => review.get({ plain: true }));
 
     // Render the homepage template with the fetched reviews and login status
-    res.render('homepage', { loggedIn, reviews });
+    res.render('home');
   } catch (err) {
     // Handle any errors that occur during the process
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+// Route to write-review page
+router.get('/write-review', async (req, res) => {
+  try {
+    res.render('write-review');
+  } catch (err) {
+    // Handle any errors that occur during the process
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 
 // Route to fetch a single review by ID with associated review, review, and restaurant
 router.get('/review/:id', async (req, res) => {

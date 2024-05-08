@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Review } = require('../../models');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -29,19 +29,20 @@ router.get('/', async (req, res) => {
     const userData = await User.findAll({
       // include: [{ model: Restaurant }, { model: Review }],
     });
-    
+
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Route to find a single user by its `id`
+// Route to find a single user by its id for display on the User page
 router.get('/:id', async (req, res) => {
   try {
-    // Fetch the user data by its ID, including associated restaurants and reviews
+    // Fetch the user data by its ID, including associated reviews
+    const userId = req.params.id;
     const userData = await User.findByPk(req.params.id, {
-      // include: [{ model: Restaurant }, { model: Review }],
+      include: [{ model: Review }],
     });
 
     if (!userData) {
@@ -49,7 +50,15 @@ router.get('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(userData);
+    const user = userData.get({ plain: true });
+    const reviews = user.Reviews;
+
+    res.render('user-details', {
+      user,
+      reviews,
+    });
+
+    // res.status(200).json(userData); // Commented out because of rendering
   } catch (err) {
     res.status(500).json(err);
   }

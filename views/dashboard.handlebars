@@ -1,14 +1,6 @@
 {{!-- this is where the user will be able to see all the riviews they write --}}
-{{#if review.length}}
-<section>
-  <h2>Your review</h2>
-    {{#each review as |review|}}
-      {{> dashboard-reviewinfo review}}
-    {{/each}}
-
-</section>
+{{#if loggedIn}}
+  {{> dashboard-details}}
+{{else}}
+  {{> login-details}}
 {{/if}}
-
-<button type="submit" class="btn"><a class="link" href="/dashboard/new">+ New Review</a></button>
-
-<script src="/public/js/addReview.js"></script>

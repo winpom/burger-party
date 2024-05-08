@@ -1,0 +1,8 @@
+<section class="container">
+  <h3 class="dashboard-title">{{user.username}}'s Reviews</h3>
+  <section class="flex-row justify-center">
+    {{#each reviews as |review|}}
+      {{> dashboard-details}}
+    {{/each}}
+  </section>
+</section>

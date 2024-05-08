@@ -50,14 +50,14 @@ Review.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1]
+                len: [10]
             }
         }
     },
 
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
         modelName: "review"
