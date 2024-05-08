@@ -1,5 +1,5 @@
 const express = require('express');
-const { Review } = require('../../models');
+const { Review, Burger, User, Restaurant } = require('../../models');
 const router = express.Router();
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
@@ -49,9 +49,9 @@ router.post('/', async (req, res) => {
 // Route to find all reviews
 router.get('/', async (req, res) => {
   try {
-    // Fetch all reviews from the database, including associated restaurants and reviews
+    // Fetch all reviews from the database, including associated models like Restaurant, Burger, and User
     const reviewData = await Review.findAll({
-      // include: [{ model: Restaurant }, { model: Review }],
+      include: [{ model: Restaurant }, { model: Burger }, { model: User }]
     });
 
     res.status(200).json(reviewData);
@@ -65,7 +65,7 @@ router.get('/:id', async (req, res) => {
   try {
     // Fetch the review data by its ID, including associated restaurants and reviews
     const reviewData = await Review.findByPk(req.params.id, {
-      // include: [{ model: Restaurant }, { model: Review }],
+      include: [{ model: Restaurant }, { model: Burger }, { model: User }]
     });
 
     if (!reviewData) {
