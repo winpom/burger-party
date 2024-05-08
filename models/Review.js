@@ -52,7 +52,11 @@ Review.init(
             validate: {
                 len: [10]
             }
-        }
+        },
+        // image: {
+        //     type: DataTypes.STRING, 
+        //     allowNull: true, 
+        //   },
     },
 
     {

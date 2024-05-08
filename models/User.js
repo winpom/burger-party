@@ -3,7 +3,11 @@ const sequelize = require("../config/connection");
 const bcrypt = require('bcrypt');
 
 // user model
-class User extends Model {}
+class User extends Model {
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password);
+      }
+}
 
 User.init(
     {
@@ -22,7 +26,7 @@ User.init(
         // column for bio
         bio: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         // column for email
         email: {
@@ -47,12 +51,6 @@ User.init(
             beforeCreate: async (newUserData) => {
               newUserData.password = await bcrypt.hash(newUserData.password, 10);
               return newUserData;
-            },
-            beforeUpdate: async (updatedUserData) => {
-              if (updatedUserData._changed.has("password")) {
-              updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-              }
-              return updatedUserData;
             },
         },
         sequelize,

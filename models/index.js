@@ -3,43 +3,13 @@ const Restaurant = require('./Restaurant');
 const Review = require('./Review');
 const User = require('./User');
 
-<<<<<<< HEAD
-User.hasMany(Review, {
-  foreignKey: '',
-=======
 // Define associations
 User.hasMany(Review, {
   foreignKey: 'user_id',
->>>>>>> 8b6cc99739650d8f4a54a312530581688efa6dba
   onDelete: 'CASCADE'
 });
 
 Review.belongsTo(User, {
-<<<<<<< HEAD
-  foreignKey: ''
-});
-
-Burger.belongsTo(Restaurant, {
-    foreignKey: ''
-  });
-
-Burger.hasMany(Review,{
-  foreignKey:''
-});
-
-Restaurant.hasMany(Burger, {
-  foreignKey: ''
-});
-
-Review.hasOne(Burger,{
-  foreignKey:''
-});
-Restaurant.hasMany(Review,{
-  foreignKey:''
-});
-
-module.exports = { Burger, Restaurant , Review, User };
-=======
   foreignKey: 'user_id'
 });
 
@@ -58,7 +28,6 @@ Restaurant.hasMany(Burger, {
   onDelete: 'CASCADE'
 });
 
-// Define associations
 Review.belongsTo(User, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
@@ -69,17 +38,10 @@ Review.belongsTo(Restaurant, {
   onDelete: 'CASCADE'
 });
 
-
-// Remove the association causing circular dependency
-// Burger.hasMany(Review, {
-//   foreignKey: 'review_id',
-//   onDelete: 'CASCADE'
-// });
-
-// Restaurant.hasMany(Review, {
-//   foreignKey: 'review_id',
-//   onDelete: 'CASCADE'
-// });
+Restaurant.hasMany(Review, {
+  foreignKey: 'restaurant_id',
+  onDelete: 'CASCADE'
+});
 
 module.exports = { Burger, Restaurant, Review, User };
->>>>>>> 8b6cc99739650d8f4a54a312530581688efa6dba
+

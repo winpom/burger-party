@@ -4,69 +4,79 @@
         "rating": 2,
         "user_id": 1,
         "restaurant_id": 1,
-        "burger_id": 1
+        "burger_id": 1,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "Decent, but not great",
         "user_id": 1,
         "restaurant_id": 2,
         "burger_id": 2,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "I'd get it again",
         "user_id": 2,
         "restaurant_id": 3,
         "burger_id": 3,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "GET IT WITH BACON",
         "user_id": 2,
         "restaurant_id": 4,
         "burger_id": 4,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "It was a burger. That's it.",
         "user_id": 2,
         "restaurant_id": 5,
         "burger_id": 5,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "Soggy buns!",
         "user_id": 3,
         "restaurant_id": 6,
         "burger_id": 6,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "Meh",
         "user_id": 3,
         "restaurant_id": 7,
         "burger_id": 7,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "I've eaten rocks with more flavor",
         "user_id": 4,
         "restaurant_id": 8,
         "burger_id": 8,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "Best. EVER.",
         "user_id": 4,
         "restaurant_id": 9,
         "burger_id": 9,
-        "rating": 2
+        "rating": 2,
+        "image": null
     },
     {
-        "review_content": "That was the worst burger I've had in a long time",
+        "review_content": "I forgot this place existed.",
         "user_id": 4,
         "restaurant_id": 10,
         "burger_id": 10,
-        "rating": 2
+        "rating": 2,
+        "image": null
     }
 ]

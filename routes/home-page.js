@@ -1,6 +1,7 @@
 const express = require('express');
 const { User, Review, Restaurant, Burger } = require('../models');
 const router = express.Router();
+const { averageRating, averageCost } = require('../utils/calcAverage')
 
 // Route to render the login page
 router.get('/login', (req, res) => {
@@ -17,8 +18,6 @@ router.get('/login', (req, res) => {
 // Route to fetch all reviews with associated review, review, and restaurant
 router.get('/', async (req, res) => {
   try {
-    // Check if the review is logged in
-    const loggedIn = req.session.loggedIn;
 
     // Fetch all reviews from the database, including associated review and review with their restaurant
     const reviewData = await Review.findAll({
@@ -27,12 +26,26 @@ router.get('/', async (req, res) => {
         { model: Restaurant, include: [{ model: Burger }] } // Include the review being reviewed and its associated restaurant
       ]
     });
+    // Fetch all reviews from the database, including associated review and review with their restaurant
+    const restaurantData = await Restaurant.findAll({
+      include: [
+        { model: Burger }, { model: Review }
+      ]
+    });
 
     // Map the fetched data to plain JavaScript objects
+    const restaurants = restaurantData.map((review) => review.get({ plain: true }));
     const reviews = reviewData.map((review) => review.get({ plain: true }));
 
+    for (let i = 0; i < restaurants.length; i++) {
+      const rating = averageRating(restaurants[i].reviews)
+      const cost = averageCost(restaurants[i].burgers)
+      restaurants[i].rating = rating.toFixed(2);
+      restaurants[i].avgCost = cost.toFixed(2);
+    }
+
     // Render the homepage template with the fetched reviews and login status
-    res.render('home');
+    res.render('home', { reviews, restaurants, loggedIn: req.session.loggedIn});
   } catch (err) {
     // Handle any errors that occur during the process
     console.log(err);
@@ -43,14 +56,19 @@ router.get('/', async (req, res) => {
 // Route to write-review page
 router.get('/write-review', async (req, res) => {
   try {
-    res.render('write-review');
+    if (!req.session.loggedIn) {
+      // Handle case where user is not logged in
+      res.render('write-review', { message: 'Please log in to write a review' });
+      return;
+    } else {
+      res.render('write-review', {loggedIn: true});
+    }
   } catch (err) {
     // Handle any errors that occur during the process
     console.log(err);
     res.status(500).json(err);
   }
 });
-
 
 // Route to fetch a single review by ID with associated review, review, and restaurant
 router.get('/review/:id', async (req, res) => {

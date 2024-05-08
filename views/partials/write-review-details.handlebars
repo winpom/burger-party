@@ -20,29 +20,17 @@
         <input type="text" id="restaurant" name="restaurant_name" class="form-input" />
 
         <label for="burger" class="form-label">Burger Name</label>
-        <input type="text" id="burger" name="burger_name" class="form-input"/>
+        <input type="text" id="burger" name="burger_name" class="form-input" />
 
         <label class="form-label" for="review">Review</label>
-        <textarea id="review" name="review" class="form-input" />
+        <textarea id="review" name="review" class="form-input"></textarea>
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="image" class="form-label">Upload Burger Image</label>
+            <input type="file" id="image" name="image" class="form-input" accept="image/*">
+        </form>
 
         <button id="submitReviewBtn" type="submit" class="btn">Submit</button>
     </form>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="image">
-        <button type="submit">Upload Burger Image</button>
-    </form>
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

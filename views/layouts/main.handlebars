@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Burger Party</title>
-  <link rel="stylesheet" href="../../public/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -18,10 +18,11 @@
         <nav class"nav">
           <a class="link" href="/">Home</a>
           <a class="link" href="/write-review">Write a Review</a>
+          <a class="link" href="/dashboard">Dashboard</a>
           {{#if loggedIn}}
-          <a class="link" href="/" id="logout">Logout</a>
+          <a id="logout">Logout</a>
           {{else}}
-          <a class="link" href="/login">Login</a>
+          <a href="/login">Login</a>
           {{/if}}
         </nav>
       </div>
@@ -30,11 +31,10 @@
     <main>
       {{{body}}}
     </main>
-    <script src="/js/form.js"></script>
   </div>
 
   {{#if loggedIn}}
-  <script src="../../public/js/logout.js"></script>
+  <script src="/js/logout.js"></script>
   {{/if}}
 
 </body>
