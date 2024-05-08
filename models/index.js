@@ -28,7 +28,6 @@ Restaurant.hasMany(Burger, {
   onDelete: 'CASCADE'
 });
 
-// Define associations
 Review.belongsTo(User, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
@@ -39,17 +38,10 @@ Review.belongsTo(Restaurant, {
   onDelete: 'CASCADE'
 });
 
-
-// Remove the association causing circular dependency
-// Burger.hasMany(Review, {
-//   foreignKey: 'review_id',
-//   onDelete: 'CASCADE'
-// });
-
-// Restaurant.hasMany(Review, {
-//   foreignKey: 'review_id',
-//   onDelete: 'CASCADE'
-// });
+Restaurant.hasMany(Review, {
+  foreignKey: 'restaurant_id',
+  onDelete: 'CASCADE'
+});
 
 module.exports = { Burger, Restaurant, Review, User };
 

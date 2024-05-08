@@ -1,0 +1,12 @@
+<section class="review">
+    <a href="/restaurant/{{id}}">
+        <header>{{restaurant_name}}</header>
+    </a>
+    <a href="/user/{{id}}">
+        <header>{{user.username}}</header>
+    </a>
+    <p class="rating">{{rating}}</p>
+    <p class="post-date">{{format_date createdAt}}</p>
+    <img class="reviewed-burger">{{burger.image}}</img>
+    <p>{{review_content}}</p>
+</section>

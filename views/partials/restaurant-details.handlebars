@@ -1,16 +1,16 @@
 <section class="restaurant">
-  <header>{{restaurant.restaurant_name}}</header>
-  <p class="average-rating">Average Rating: {{averageReview}}</p>
-  <p class="average-cost">Average Price: ${{averagePrice}}</p>
+  <h1>{{restaurant_name}}</h1>
+  <p class="average-rating">Average Rating: {{rating}}</p>
+  <p class="average-cost">Average Price: ${{avgCost}}</p>
   <h3>Reviews:</h3>
-  {{#each restaurant.Reviews}}
+  {{#each reviews}}
     <p>{{review_content}}</p>
     <p>Rating: {{review_star}}</p>
   {{/each}}
   <h3>Burgers:</h3>
-  {{#each restaurant.Burgers}}
+  {{#each burgers}}
     <p>{{burger_name}}</p>
-    <p>Total Cost: ${{total_cost}}</p>
+    <p>${{total_cost}}</p>
     <img src="{{burger.image}}" alt="Burger Image">
   {{/each}}
 </section>
