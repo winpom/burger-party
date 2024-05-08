@@ -2,41 +2,25 @@ const express = require('express');
 const { Review, Burger, User, Restaurant } = require('../../models');
 const router = express.Router();
 const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
-
-// Create a new review WITHOUT image upload
-// router.post('/', async (req, res) => {
-//   try {
-//     // Create a new review with the provided title, content, and associated restaurant ID
-//     const newReview = await Review.create({
-//       title: req.body.title,
-//       rating: req.body.rating,
-//       review_content: req.body.review_content,
-//       restaurant_id: req.body.restaurant_id,
-//       burger_id: req.body.burger_id,
-//       user_id: req.body.user_id,
-//     });
-
-//     res.status(200).json(newReview);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
+const upload = multer({ dest: 'public/images/' })
 
 // Create a new review with image upload
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', 
+// upload.single('image'), 
+async (req, res) => {
   try {
+    // Get the compressed image data from the request body
+    // const compressedImageData = req.body.image;
+
     // Create a new review with the provided title, content, and associated IDs
     const newReview = await Review.create({
-      title: req.body.title,
       rating: req.body.rating,
       review_content: req.body.review_content,
       restaurant_id: req.body.restaurant_id,
       burger_id: req.body.burger_id,
       user_id: req.session.user_id,
-      // Add the filename of the uploaded image to the database
-      image: req.file ? req.file.filename : null,
+      // Save the compressed image data to the database
+      // image: compressedImageData,
     });
 
     res.status(200).json(newReview);
@@ -45,7 +29,6 @@ router.post('/', upload.single('image'), async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // Route to find all reviews
 router.get('/', async (req, res) => {
