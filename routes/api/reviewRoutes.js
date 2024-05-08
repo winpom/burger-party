@@ -5,16 +5,38 @@ const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
 // Create a new review WITHOUT image upload
-router.post('/', async (req, res) => {
+// router.post('/', async (req, res) => {
+//   try {
+//     // Create a new review with the provided title, content, and associated restaurant ID
+//     const newReview = await Review.create({
+//       title: req.body.title,
+//       rating: req.body.rating,
+//       review_content: req.body.review_content,
+//       restaurant_id: req.body.restaurant_id,
+//       burger_id: req.body.burger_id,
+//       user_id: req.body.user_id,
+//     });
+
+//     res.status(200).json(newReview);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
+
+// Create a new review with image upload
+router.post('/', upload.single('image'), async (req, res) => {
   try {
-    // Create a new review with the provided title, content, and associated restaurant ID
+    // Create a new review with the provided title, content, and associated IDs
     const newReview = await Review.create({
       title: req.body.title,
       rating: req.body.rating,
       review_content: req.body.review_content,
       restaurant_id: req.body.restaurant_id,
       burger_id: req.body.burger_id,
-      user_id: req.body.user_id,
+      user_id: req.session.user_id,
+      // Add the filename of the uploaded image to the database
+      image: req.file ? req.file.filename : null,
     });
 
     res.status(200).json(newReview);
@@ -24,27 +46,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// // Create a new review with image upload
-// router.post('/', upload.single('photo'), async (req, res) => {
-//   try {
-//     // Create a new review with the provided title, content, and associated restaurant ID
-//     const newReview = await Review.create({
-// title: req.body.title,
-// rating: req.body.rating,
-// review_content: req.body.review_content,
-// restaurant_id: req.body.restaurant_id,
-// burger_id: req.body.burger_id, 
-// user_id: req.body.user_id,
-//       // Add the filename of the uploaded image to the database
-//       image: req.file.filename // Assuming the column name in the database is 'image' - we will need to confirm
-//     });
-
-//     res.status(200).json(newReview);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
 // Route to find all reviews
 router.get('/', async (req, res) => {

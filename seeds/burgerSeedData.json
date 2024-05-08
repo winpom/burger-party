@@ -1,52 +1,52 @@
 [
   {
     "burger_name": "Bay Area Burger #1",
-    "total_cost": 20.43,
+    "total_cost": 10.03,
     "restaurant_id": 1
   },
   {
     "burger_name": "Bay Area Burger #2",
-    "total_cost": 20.43,
+    "total_cost": 15.22,
     "restaurant_id": 2
   },
   {
     "burger_name": "Bay Area Burger #3",
-    "total_cost": 20.43,
+    "total_cost": 9.99,
     "restaurant_id": 3
   },
   {
     "burger_name": "Bay Area Burger #4",
-    "total_cost": 20.43,
+    "total_cost": 32.11,
     "restaurant_id": 4
   },
   {
     "burger_name": "Bay Area Burger #5",
-    "total_cost": 20.43,
+    "total_cost": 12.43,
     "restaurant_id": 5
   },
   {
     "burger_name": "Bay Area Burger #6",
-    "total_cost": 20.43,
+    "total_cost": 16.88,
     "restaurant_id": 6
   },
   {
     "burger_name": "Bay Area Burger #7",
-    "total_cost": 20.43,
+    "total_cost": 13.97,
     "restaurant_id": 7
   },
   {
     "burger_name": "Bay Area Burger #8",
-    "total_cost": 20.43,
+    "total_cost": 13.33,
     "restaurant_id": 8
   },
   {
     "burger_name": "Bay Area Burger #9",
-    "total_cost": 20.43,
+    "total_cost": 14.65,
     "restaurant_id": 9
   },
   {
     "burger_name": "Bay Area Burger #10",
-    "total_cost": 20.43,
+    "total_cost": 5.43,
     "restaurant_id": 10
   }
 ]

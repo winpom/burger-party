@@ -16,10 +16,10 @@ const hbs = exphbs.create({ helpers });
 // Configure disk storage for multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Specify the directory where files will be stored
+    cb(null, 'public/images/'); // Specify the directory where files will be stored
   },
   filename: function (req, file, cb) {
-    const filename = req.body.id + '-' + Date.now() + '-' + file.originalname;
+    const filename = req.body.burger_name + '-' + Date.now() + '-' + file.originalname; // Adjust the filename as per your requirement
     cb(null, filename);
   }
 });

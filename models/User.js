@@ -26,7 +26,7 @@ User.init(
         // column for bio
         bio: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         // column for email
         email: {

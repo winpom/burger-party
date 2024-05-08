@@ -5,6 +5,12 @@ const router = express.Router();
 // Route to display the user dashboard with their reviews
 router.get('/', async (req, res) => {
   try {
+    if (!req.session.user_id) {
+      // Handle case where user is not logged in
+      res.render('dashboard', { message: 'Please log in to view the dashboard' });
+      return;
+    }
+    
     // Fetch the user data based on the user ID stored in the session
     const userData = await User.findByPk(req.session.user_id);
 
@@ -26,7 +32,7 @@ router.get('/', async (req, res) => {
     res.render('dashboard', {
       user,
       reviews,
-      loggedIn: true,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     // Handle any errors that occur during the process
@@ -36,13 +42,13 @@ router.get('/', async (req, res) => {
 });
 
 // Route to render the new review creation page
-router.get('/new', async (req, res) => {
+router.get('/write-review', async (req, res) => {
   try {
     // Get the logged-in user's username from the session
     const loggedInUsername = req.session.username; 
 
     // Render the new review page with the logged-in username
-    res.render('new-review', { loggedIn: true, username: loggedInUsername });
+    res.render('write-review', { loggedIn: req.session.loggedIn, username: loggedInUsername });
   } catch (err) {
     // Handle any errors that occur during the process
     console.error('Error rendering new review page:', err);
