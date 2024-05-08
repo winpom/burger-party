@@ -4,6 +4,7 @@
   <p class="average-cost">Average Price: ${{avgCost}}</p>
   <h3>Reviews:</h3>
   {{#each reviews}}
+    <p>{{user.username}}</p> 
     <p>{{review_content}}</p>
     <p>Rating: {{review_star}}</p>
   {{/each}}

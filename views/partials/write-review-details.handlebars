@@ -15,22 +15,32 @@
         <label for="5stars" class="star-label">5</label>
     </div>
     <form class="card-body new-review-form" id="new-review-form">
-
-        <label for="restaurant" class="form-label">Restaurants</label>
-        <input type="text" id="restaurant" name="restaurant_name" class="form-input" />
+        <label for="restaurant" class="form-label">Restaurant</label>
+        <select id="restaurant_id" name="restaurant_id" class="form-input">
+            <option value="">Select a restaurant</option>
+            {{#each restaurants as |restaurant|}}
+                <option value="{{id}}">{{restaurant_name}}</option>
+            {{/each}}
+            <option value="new">Create New Restaurant</option>
+        </select>
 
         <label for="burger" class="form-label">Burger Name</label>
-        <input type="text" id="burger" name="burger_name" class="form-input" />
+        <select id="burger_id" name="burger_id" class="form-input">
+            <option value="">Select a burger</option>
+            {{#each burgers}}
+                <option value="{{id}}">{{burger_name}}</option>
+            {{/each}}
+            <option value="new">Create New Burger</option>
+        </select>
 
         <label class="form-label" for="review">Review</label>
-        <textarea id="review" name="review" class="form-input"></textarea>
+        <textarea id="review_content" name="review" class="form-input"></textarea>
 
         <form action="/upload" method="post" enctype="multipart/form-data">
             <label for="image" class="form-label">Upload Burger Image</label>
             <input type="file" id="image" name="image" class="form-input" accept="image/*">
         </form>
 
-        <button id="submitReviewBtn" type="submit" class="btn">Submit</button>
+        <button id="submitReviewBtn" type="button" class="btn">Submit</button>
     </form>
-
 </div>
