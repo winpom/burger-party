@@ -16,36 +16,27 @@
 
   <body>
     <div class="wrapper">
-      <header class="hero min-h-screen">
-        <img src="./images/diner.webp" class="dinerhero" />
-        <section class="divisionherotext">
+      <div class="navbar">
+        <div class="navbar-start">
           <h6 class="htext1" style="font-size: 20px">Welcome to</h6>
-          <h1 class="htext2" style="font-size: 70px">the Burger Party</h1>
-        </section>
-        <div>
-          <nav class="nav">
-            <div id="divone">
-              <a class="link" href="/"> Home </a>
-              <a href="#home"><button class="">Home</button></a>
-            </div>
-            <div id="divone">
-              <a class="link" href="/write-review">Write a Review</a>
-              <a href="#writereview"><button class="">Write a Review</button></a>
-            </div>
-            <div id="divone">
-              <a class="link" href="/dashboard">Dashboard</a>
-              <a href="#dashboard"><button class="">Dashboard</button></a>
-            </div>
-            {{#if loggedIn}}
-              <a id="logout">Logout</a>
-            {{else}}
-              <a href="/login">Login</a>
-              <a href="#logging"><button class="">Login</button></a>
-            {{/if}}
-          </nav>
+          <h1 class="htext2" style="font-size: 40px">Burger Party</h1>
         </div>
-      </header>
-
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li id="divone"><a class="link" href="/"> Home </a></li>
+            <li id="divone"><a class="link" href="/write-review">Write a Review</a></li>
+            <li id="divone"><a class="link" href="/dashboard">Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="navbar-end">
+          {{#if loggedIn}}
+            <a class="btn" id="logout">Logout</a>
+          {{else}}
+            <a class="btn" href="/login">Login</a>
+          {{/if}}
+        </div>
+      </div>
+<hr>
       <main>
         {{{body}}}
       </main>
