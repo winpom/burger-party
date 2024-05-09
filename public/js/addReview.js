@@ -138,7 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
         star.addEventListener('mouseout', () => {
             highlightStars(selectedRating);
         });
-    });
+    },
+    );
+
 
     function highlightStars(value) {
         stars.forEach(star => {
@@ -149,115 +151,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 star.innerHTML = '&#9734;'; // empty star
             }
         });
+        document.querySelector("#rating").dataset.rating = value;
     }
 
-    // Function to compress image
-    async function compressImage(file, maxWidth, maxHeight, quality) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        return new Promise((resolve, reject) => {
-            reader.onload = async function (event) {
-                const img = new Image();
-                img.src = event.target.result;
-                img.onload = async function () {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    let width = img.width;
-                    let height = img.height;
-
-                    // Calculate new dimensions
-                    if (width > height) {
-                        if (width > maxWidth) {
-                            height *= maxWidth / width;
-                            width = maxWidth;
-                        }
-                    } else {
-                        if (height > maxHeight) {
-                            width *= maxHeight / height;
-                            height = maxHeight;
-                        }
-                    }
-
-                    // Set canvas dimensions
-                    canvas.width = width;
-                    canvas.height = height;
-
-                    // Draw image on canvas
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    // Get compressed image data URL
-                    const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
-
-                    // Convert data URL to Blob
-                    const blob = await fetch(compressedDataUrl).then(res => res.blob());
-
-                    resolve(blob);
-                };
-            };
-            reader.onerror = reject;
-        });
-    }
-
-    // Review form submission
     const submitReviewButton = document.getElementById('submitReviewBtn');
-if (submitReviewButton) {
-    submitReviewButton.addEventListener('click', async (event) => {
-        event.preventDefault();
-
-        // Get values from the form
-        const rating = document.getElementById('rating').value;
-        const restaurantId = document.getElementById('restaurant_id').value;
-        const burgerId = document.getElementById('burger_id').value;
-        const review = document.getElementById('review_content').value;
-        const imageInput = document.getElementById('image');
-        let compressedImage = null;
-
-        // Check if the user uploaded an image
-        if (imageInput.files.length > 0) {
-            // Get the uploaded image file
-            const image = imageInput.files[0];
-            
-            // Compress the image
-            compressedImage = await compressImage(image, 400, 300, 0.7);
-        }
-
-        // Create FormData object to send both JSON and compressed image data
-        const formData = new FormData();
-        formData.append('rating', rating);
-        formData.append('restaurant_id', restaurantId);
-        formData.append('burger_id', burgerId);
-        formData.append('review_content', review);
-        
-        // Append the compressed image if available
-        if (compressedImage) {
-            formData.append('image', compressedImage);
-        }
-
-        try {
-            const response = await fetch(`/api/review`, {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                alert('Review added successfully!');
-                window.location.reload();
-            } else {
-                alert('Failed to add review.');
-            }
-        } catch (error) {
-            console.error('Error adding review:', error);
-            alert('An error occurred. Please try again.');
-        }
-    });
-}
+    if (submitReviewButton) {
+        submitReviewButton.addEventListener('click', async (event) => {
+        alert('clicked!')
+        })}
 
     // Review deletion
     document.addEventListener('click', async (event) => {
         // Check if the clicked element is a delete button
         if (event.target.classList.contains('deleteBtn')) {
             // Get the review ID from the dataset attribute
-            const reviewId = event.target.dataset.postId;
+            const reviewId = event.target.dataset.reviewId;
+            // console.log(reviewId)
 
             // Ask for confirmation before deletion
             const isConfirmed = confirm('Are you sure you want to delete this review?');

@@ -1,14 +1,23 @@
 <section class="review">
-    <a href="/restaurant/{{restaurant.id}}">
-        <h1>{{restaurant.restaurant_name}}</h1>
-    </a>
-    <a href="/user/{{user.id}}">
-        <h2>{{user.username}}</h2>
-    </a>
-    <p class="rating">{{convertToStars rating}}</p>
-    <p class="post-date">{{format_date createdAt}}</p>
-    {{#if image}}
-    <img class="reviewed-burger" src="{{image}}" alt="Burger Image">
-    {{/if}}
-    <p>{{review_content}}</p>
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img class="reviewed-burger" src="/uploads/{{image}}" alt="Burger Image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <a href="/restaurant/{{restaurant.id}}">
+                        <p class="card-title">{{restaurant.restaurant_name}}</p>
+                    </a>
+                    <a href="/user/{{user.id}}">
+                        <h4>{{user.username}}</h4>
+                    </a>
+                    <p class="card-text">{{review_content}}</p>
+                    <p class="rating">{{convertToStars rating}}</p>
+                    <p class="card-text"><small class="text-muted">Created on {{format_date createdAt}}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
