@@ -162,7 +162,7 @@ router.get('/user/:id', async (req, res) => {
     // Fetch all reviews created by the user, including associated burger and restaurant
     const userReviews = await Review.findAll({
       where: {
-        user_id: req.session.user_id,
+        user_id: userId,
       },
       include: [
         { model: Burger, include: [{ model: Restaurant }] } // Include the burger being reviewed and its associated restaurant

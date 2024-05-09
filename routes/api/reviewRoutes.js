@@ -5,25 +5,27 @@ const multer = require('multer')
 const upload = multer({ dest: 'public/images/' })
 
 // Create a new review with image upload
+// upload.single('image'), 
 router.post('/',
-  upload.single('image'),
   async (req, res) => {
     try {
       // Get the compressed image data from the request body
-      const compressedImageData = req.body.image;
+      // const compressedImageData = req.body.image;
+      console.log(req.body);
 
+      const { rating, restaurant_id, burger_id, review_content } = req.body;
+      
       // Create a new review with the provided title, content, and associated IDs
-      const newReview = await Review.create({
-        rating: req.body.rating,
-        review_content: req.body.review_content,
-        restaurant_id: req.body.restaurant_id,
-        burger_id: req.body.burger_id,
-        user_id: req.session.user_id,
-        // Save the compressed image data to the database
-        image: compressedImageData,
-      });
-
-      res.status(200).json(newReview);
+        const newReview = await Review.create({
+          rating: parseInt(rating),
+          review_content,
+          restaurant_id: parseInt(restaurant_id),
+          burger_id: parseInt(burger_id),
+          user_id: req.session.user_id
+          // Save the compressed image data to the database
+          // image: compressedImageData,
+        });
+        res.status(200).json(newReview);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
