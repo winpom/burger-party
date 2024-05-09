@@ -14,6 +14,8 @@
     {{#each restaurant.burgers}}
     <p>{{burger_name}}</p>
     <p>${{total_cost}}</p>
-    <img class="reviewed-burger" alt="Burger Image" src="{{image}}" />
+    {{#if image}}
+    <img class="reviewed-burger" src="{{image}}" alt="Burger Image">
+    {{/if}}
     {{/each}}
 </section>
