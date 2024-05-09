@@ -23,7 +23,8 @@ body {
 
 .navbar {
   background: linear-gradient(to bottom, silver, white, white);
-  
+} 
+
 a {
   text-decoration: none;
 }
@@ -40,6 +41,7 @@ a {
   );
   color: white;
   border-radius: 10px;
+}
 
 .review {
   margin-left: 40px;
