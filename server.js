@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
     cb(null, 'public/images/'); // Specify the directory where files will be stored
   },
   filename: function (req, file, cb) {
-    const filename = req.body.burger_name + '-' + Date.now() + '-' + file.originalname; // Adjust the filename as per your requirement
+    const filename = req.body.burger_name + '-' + Date.now(); // Adjust the filename as per your requirement
     cb(null, filename);
   }
 });

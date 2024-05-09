@@ -200,48 +200,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Review form submission
     const submitReviewButton = document.getElementById('submitReviewBtn');
-    if (submitReviewButton) {
-        submitReviewButton.addEventListener('click', async (event) => {
-            event.preventDefault();
+if (submitReviewButton) {
+    submitReviewButton.addEventListener('click', async (event) => {
+        event.preventDefault();
 
-            // Get values from the form
-            const rating = document.getElementById('rating').value;
-            const restaurantId = document.getElementById('restaurant_id').value;
-            const burgerId = document.getElementById('burger_id').value;
-            const review = document.getElementById('review_content').value;
-            // const image = document.getElementById('input[name="image"]').files[0];
+        // Get values from the form
+        const rating = document.getElementById('rating').value;
+        const restaurantId = document.getElementById('restaurant_id').value;
+        const burgerId = document.getElementById('burger_id').value;
+        const review = document.getElementById('review_content').value;
+        const imageInput = document.getElementById('image');
+        let compressedImage = null;
 
-            // Compress image
-            // const compressedImage = await compressImage(image, 400, 300, 0.7);
+        // Check if the user uploaded an image
+        if (imageInput.files.length > 0) {
+            // Get the uploaded image file
+            const image = imageInput.files[0];
+            
+            // Compress the image
+            compressedImage = await compressImage(image, 400, 300, 0.7);
+        }
 
-            // Create FormData object to send both JSON and compressed image data
-            const formData = new FormData();
-            formData.append('rating', rating);
-            formData.append('restaurantId', restaurantId);
-            formData.append('burgerId', burgerId);
-            formData.append('review', review);
-            // formData.append('image', compressedImage);
+        // Create FormData object to send both JSON and compressed image data
+        const formData = new FormData();
+        formData.append('rating', rating);
+        formData.append('restaurant_id', restaurantId);
+        formData.append('burger_id', burgerId);
+        formData.append('review_content', review);
+        
+        // Append the compressed image if available
+        if (compressedImage) {
+            formData.append('image', compressedImage);
+        }
 
-            try {
-                const response = await fetch(`/api/review`, {
-                    method: 'POST',
-                    headers: {
-                    },
-                    body: formData,
-                });
+        try {
+            const response = await fetch(`/api/review`, {
+                method: 'POST',
+                body: formData,
+            });
 
-                if (response.ok) {
-                    alert('Review added successfully!');
-                    window.location.reload();
-                } else {
-                    alert('Failed to add review.');
-                }
-            } catch (error) {
-                console.error('Error adding review:', error);
-                alert('An error occurred. Please try again.');
+            if (response.ok) {
+                alert('Review added successfully!');
+                window.location.reload();
+            } else {
+                alert('Failed to add review.');
             }
-        });
-    }
+        } catch (error) {
+            console.error('Error adding review:', error);
+            alert('An error occurred. Please try again.');
+        }
+    });
+}
 
     // Review deletion
     document.addEventListener('click', async (event) => {

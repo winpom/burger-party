@@ -4,14 +4,16 @@
   <p class="average-cost">Average Price: ${{avgCost}}</p>
   <h3>Reviews:</h3>
   {{#each reviews}}
-    <p>{{user.username}}</p> 
-    <p>{{review_content}}</p>
-    <p>Rating: {{review_star}}</p>
+  <p>{{user.username}}</p>
+  <p>{{review_content}}</p>
+  <p>Rating: {{review_star}}</p>
   {{/each}}
   <h3>Burgers:</h3>
   {{#each burgers}}
-    <p>{{burger_name}}</p>
-    <p>${{total_cost}}</p>
-    <img class="reviewed-burger" alt="Burger Image">{{image}}</img>
+  <p>{{burger_name}}</p>
+  <p>${{total_cost}}</p>
+  {{#if image}}
+  <img class="reviewed-burger" src="{{image}}" alt="Burger Image">
+  {{/if}}
   {{/each}}
 </section>
