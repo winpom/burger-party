@@ -2,35 +2,47 @@ const express = require('express');
 const { Review, Burger, User, Restaurant } = require('../../models');
 const router = express.Router();
 const multer = require('multer')
-const upload = multer({ dest: 'public/images/' })
 
-// Create a new review with image upload
-// upload.single('image'), 
-router.post('/',
-  async (req, res) => {
-    try {
-      // Get the compressed image data from the request body
-      // const compressedImageData = req.body.image;
-      console.log(req.body);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + ".jpg"
+    cb(null, file.fieldname + '-' + uniqueSuffix)
+  }
+})
 
-      const { rating, restaurant_id, burger_id, review_content } = req.body;
-      
-      // Create a new review with the provided title, content, and associated IDs
-        const newReview = await Review.create({
-          rating: parseInt(rating),
-          review_content,
-          restaurant_id: parseInt(restaurant_id),
-          burger_id: parseInt(burger_id),
-          user_id: req.session.user_id
-          // Save the compressed image data to the database
-          // image: compressedImageData,
-        });
-        res.status(200).json(newReview);
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
+const upload = multer({ storage: storage })
+
+//multer 
+router.post('/', upload.single('uploaded_file'), async function (req, res) {
+  console.log(req.file, req.body)
+  try {
+    
+    const { rating, restaurant_id, burger_id, review_content } = req.body;
+    console.log(req.body)
+    console.log('rating', rating)
+    console.log('restarant id',restaurant_id)
+    console.log('burger id', burger_id)
+    console.log('review', review_content)
+
+    // Create a new review with the provided title, content, and associated IDs
+    const newReview = await Review.create({
+      rating: parseInt(rating),
+      review_content,
+      restaurant_id: parseInt(restaurant_id),
+      burger_id: parseInt(burger_id),
+      user_id: req.session.user_id,
+      // Add the filename of the uploaded image to the database
+      image: req.file ? req.file.filename : null,
+    });
+    res.status(200).json(newReview);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // Route to find all reviews
 router.get('/', async (req, res) => {

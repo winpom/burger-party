@@ -5,7 +5,7 @@
   <p class="rating">{{convertToStars rating}}</p>
   <p class="post-date">{{format_date createdAt}}</p>
   {{#if image}}
-  <img class="reviewed-burger" src="{{image}}" alt="Burger Image">
+    <img class="reviewed-burger" src="/uploads/{{image}}" alt="Burger Image">
   {{/if}}
   <p>{{review_content}}</p>
 </section>

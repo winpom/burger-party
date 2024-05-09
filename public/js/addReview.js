@@ -154,113 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("#rating").dataset.rating = value;
     }
 
-    // Function to compress image
-    async function compressImage(file, maxWidth, maxHeight, quality) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        return new Promise((resolve, reject) => {
-            reader.onload = async function (event) {
-                const img = new Image();
-                img.src = event.target.result;
-                img.onload = async function () {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    let width = img.width;
-                    let height = img.height;
-
-                    // Calculate new dimensions
-                    if (width > height) {
-                        if (width > maxWidth) {
-                            height *= maxWidth / width;
-                            width = maxWidth;
-                        }
-                    } else {
-                        if (height > maxHeight) {
-                            width *= maxHeight / height;
-                            height = maxHeight;
-                        }
-                    }
-
-                    // Set canvas dimensions
-                    canvas.width = width;
-                    canvas.height = height;
-
-                    // Draw image on canvas
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    // Get compressed image data URL
-                    const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
-
-                    // Convert data URL to Blob
-                    const blob = await fetch(compressedDataUrl).then(res => res.blob());
-
-                    resolve(blob);
-                };
-            };
-            reader.onerror = reject;
-        });
-    }
-
-    // Review form submission
     const submitReviewButton = document.getElementById('submitReviewBtn');
     if (submitReviewButton) {
         submitReviewButton.addEventListener('click', async (event) => {
-            event.preventDefault();
-
-            // Get values from the form
-            const rating = document.getElementById('rating').dataset.rating;
-            const restaurantId = document.getElementById('restaurant_id').value;
-            const burgerId = document.getElementById('burger_id').value;
-            const review = document.getElementById('review_content').value;
-            const imageInput = document.getElementById('image');
-            let compressedImage = null;
-
-            // Check if the user uploaded an image
-            if (imageInput.files.length > 0) {
-                // Get the uploaded image file
-                const image = imageInput.files[0];
-
-                // Compress the image
-                compressedImage = await compressImage(image, 400, 300, 0.7);
-            }
-
-            // Create FormData object to send both JSON and compressed image data
-            const formData = {
-                'rating': rating,
-                'restaurant_id': restaurantId,
-                'burger_id': burgerId,
-                'review_content': review
-            }
-
-            // Append the compressed image if available
-            if (compressedImage) {
-                formData.image = compressedImage;
-            }
-            if (formData.review_content.length < 10) {
-                alert("Review content must be at least 10 characters")
-            }
-            else if (formData.rating && formData.restaurant_id && formData.burger_id && formData.review_content) {
-                try {
-                    const response = await fetch(`/api/review`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData),
-                    });
-                    if (response.ok) {
-                        alert('Review added successfully!');
-                        window.location.replace("/dashboard")
-                    } else {
-                        alert('Failed to add review.');
-                    }
-                } catch (error) {
-                    console.error('Error adding review:', error);
-                    alert('An error occurred. Please try again.');
-                }
-        } else {
-            alert("Please answer all questions before submitting your review.")
-        }
-        });
-    }
+        alert('clicked!')
+        })}
 
     // Review deletion
     document.addEventListener('click', async (event) => {
