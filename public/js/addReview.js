@@ -138,7 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
         star.addEventListener('mouseout', () => {
             highlightStars(selectedRating);
         });
-    });
+    },
+    );
+
 
     function highlightStars(value) {
         stars.forEach(star => {
@@ -149,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 star.innerHTML = '&#9734;'; // empty star
             }
         });
+        document.querySelector("#rating").dataset.rating = value;
     }
 
     // Function to compress image
@@ -200,57 +203,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Review form submission
     const submitReviewButton = document.getElementById('submitReviewBtn');
-if (submitReviewButton) {
-    submitReviewButton.addEventListener('click', async (event) => {
-        event.preventDefault();
+    if (submitReviewButton) {
+        submitReviewButton.addEventListener('click', async (event) => {
+            event.preventDefault();
 
-        // Get values from the form
-        const rating = document.getElementById('rating').value;
-        const restaurantId = document.getElementById('restaurant_id').value;
-        const burgerId = document.getElementById('burger_id').value;
-        const review = document.getElementById('review_content').value;
-        const imageInput = document.getElementById('image');
-        let compressedImage = null;
+            // Get values from the form
+            const rating = document.getElementById('rating').dataset.rating;
+            const restaurantId = document.getElementById('restaurant_id').value;
+            const burgerId = document.getElementById('burger_id').value;
+            const review = document.getElementById('review_content').value;
+            const imageInput = document.getElementById('image');
+            let compressedImage = null;
 
-        // Check if the user uploaded an image
-        if (imageInput.files.length > 0) {
-            // Get the uploaded image file
-            const image = imageInput.files[0];
-            
-            // Compress the image
-            compressedImage = await compressImage(image, 400, 300, 0.7);
-        }
+            // Check if the user uploaded an image
+            if (imageInput.files.length > 0) {
+                // Get the uploaded image file
+                const image = imageInput.files[0];
 
-        // Create FormData object to send both JSON and compressed image data
-        const formData = new FormData();
-        formData.append('rating', rating);
-        formData.append('restaurant_id', restaurantId);
-        formData.append('burger_id', burgerId);
-        formData.append('review_content', review);
-        
-        // Append the compressed image if available
-        if (compressedImage) {
-            formData.append('image', compressedImage);
-        }
-
-        try {
-            const response = await fetch(`/api/review`, {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                alert('Review added successfully!');
-                window.location.reload();
-            } else {
-                alert('Failed to add review.');
+                // Compress the image
+                compressedImage = await compressImage(image, 400, 300, 0.7);
             }
-        } catch (error) {
-            console.error('Error adding review:', error);
-            alert('An error occurred. Please try again.');
+
+            // Create FormData object to send both JSON and compressed image data
+            const formData = {
+                'rating': rating,
+                'restaurant_id': restaurantId,
+                'burger_id': burgerId,
+                'review_content': review
+            }
+
+            // Append the compressed image if available
+            if (compressedImage) {
+                formData.image = compressedImage;
+            }
+            if (formData.review_content.length < 10) {
+                alert("Review content must be at least 10 characters")
+            }
+            else if (formData.rating && formData.restaurant_id && formData.burger_id && formData.review_content) {
+                try {
+                    const response = await fetch(`/api/review`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData),
+                    });
+                    if (response.ok) {
+                        alert('Review added successfully!');
+                        window.location.replace("/dashboard")
+                    } else {
+                        alert('Failed to add review.');
+                    }
+                } catch (error) {
+                    console.error('Error adding review:', error);
+                    alert('An error occurred. Please try again.');
+                }
+        } else {
+            alert("Please answer all questions before submitting your review.")
         }
-    });
-}
+        });
+    }
 
     // Review deletion
     document.addEventListener('click', async (event) => {

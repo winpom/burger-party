@@ -53,10 +53,11 @@ Review.init(
                 len: [10]
             }
         },
-        // image: {
-        //     type: DataTypes.STRING, 
-        //     allowNull: true, 
-        //   },
+        // images
+        image: {
+            type: DataTypes.STRING, 
+            allowNull: true, 
+          },
     },
 
     {
