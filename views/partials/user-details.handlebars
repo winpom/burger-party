@@ -1,8 +1,9 @@
-<section class="container">
-  <h3 class="dashboard-title">{{user.username}}'s Reviews</h3>
-  <section class="flex-row justify-center">
-    {{#each reviews as |review|}}
-      {{> dashboard-details}}
-    {{/each}}
-  </section>
+<section class="review">
+  <a href="/restaurant/{{id}}">
+    <h1>{{restaurant_name}}</h1>
+  </a>
+  <p class="rating">{{convertToStars rating}}</p>
+  <p class="post-date">{{format_date createdAt}}</p>
+  <img class="reviewed-burger" alt="Burger Image">{{image}}</img>
+  <p>{{review_content}}</p>
 </section>

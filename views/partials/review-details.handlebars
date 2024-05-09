@@ -1,11 +1,11 @@
 <section class="review">
-    <a href="/restaurant/{{id}}">
+    <a href="/restaurant/{{restaurant.id}}">
         <h1>{{restaurant.restaurant_name}}</h1>
     </a>
-    <a href="/user/{{id}}">
+    <a href="/user/{{user.id}}">
         <h2>{{user.username}}</h2>
     </a>
-    <p class="rating">{{rating}}</p>
+    <p class="rating">{{convertToStars rating}}</p>
     <p class="post-date">{{format_date createdAt}}</p>
     <img class="reviewed-burger" alt="Burger Image">{{image}}</img>
     <p>{{review_content}}</p>
