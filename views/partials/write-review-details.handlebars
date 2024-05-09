@@ -1,20 +1,22 @@
 {{!-- this is the form that will be used when the user wants to add new review --}}
 <div class="card">
     <h3 class="card-header">Write a review</h3>
-    <h4 class="rating">How would you rate your burger?</h4>
-    <div id="rating" data-rating="">
-        <span class="star" data-value="1">&#9734;</span>
-        <span class="star" data-value="2">&#9734;</span>
-        <span class="star" data-value="3">&#9734;</span>
-        <span class="star" data-value="4">&#9734;</span>
-        <span class="star" data-value="5">&#9734;</span>
-    </div>
-    <form class="card-body new-review-form" id="new-review-form">
+    <form class="card-body new-review-form" id="new-review-form" action="/api/review" enctype="multipart/form-data"
+        method="post">
+        <select id="rating" name="rating" class="form-input">
+            <option value="">Select a rating</option>
+            <option class="star" value="1">1;</option>
+            <option class="star" value="2">2;</option>
+            <option class="star" value="3">3;</option>
+            <option class="star" value="4">4;</option>
+            <option class="star" value="5">5;</option>
+        </select>
+
         <label for="restaurant" class="form-label">Restaurant</label>
         <select id="restaurant_id" name="restaurant_id" class="form-input">
             <option value="">Select a restaurant</option>
             {{#each restaurants as |restaurant|}}
-                <option value="{{id}}">{{restaurant_name}}</option>
+            <option value="{{id}}">{{restaurant_name}}</option>
             {{/each}}
             <option value="new">Create New Restaurant</option>
         </select>
@@ -23,17 +25,29 @@
         <select id="burger_id" name="burger_id" class="form-input">
             <option value="">Select a burger</option>
             {{#each burgers}}
-                <option value="{{id}}">{{burger_name}}</option>
+            <option value="{{id}}">{{burger_name}}</option>
             {{/each}}
             <option value="new">Create New Burger</option>
         </select>
 
         <label class="form-label" for="review">Review</label>
-        <textarea id="review_content" name="review" class="form-input"></textarea>
+        <textarea id="review_content" name="review_content" class="form-input"></textarea>
 
-        <label for="image" class="form-label">Upload Burger Image</label>
-        <input type="file" id="image" name="image" class="form-input" accept="image/*">
+        {{!-- <form action="/profile" method="post" enctype="multipart/form-data"> --}}
+            <input type="file" class="form-control-file" name="uploaded_file">
+            {{!-- <input type="submit" value="" class="btn"> --}}
+            {{!--
+        </form> --}}
 
-        <button id="submitReviewBtn" type="button" class="btn">Submit</button>
+        <button id="submitReviewBtn" type="submit" class="btn">Submit</button>
     </form>
 </div>
+
+{{!--
+<form action="/api/review" enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <input type="file" class="form-control-file" name="uploaded_file">
+        <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
+        <input type="submit" value="Get me the stats!" class="btn btn-default">
+    </div>
+</form> --}}
