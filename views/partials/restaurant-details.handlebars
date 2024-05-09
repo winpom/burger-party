@@ -1,4 +1,4 @@
-<section class="restaurant">
+{{!-- <section class="restaurant">
   <h1>{{restaurant_name}}</h1>
   <p class="average-rating">Average Rating: {{convertToStars rating}}</p>
   <p class="average-cost">Average Price: ${{avgCost}}</p>
@@ -16,4 +16,32 @@
   <img class="reviewed-burger" src="{{image}}" alt="Burger Image">
   {{/if}}
   {{/each}}
+</section> --}}
+
+<section class="review">
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{image}}" class="card-img" alt="Burger Image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                      <p class="card-title">{{restaurant_name}}</p>
+                      <p class="average-rating">Average Rating: {{convertToStars rating}}</p>
+                      <p class="average-cost">Average Price: ${{avgCost}}</p>
+                        {{#each reviews}}
+                        <p>{{user.username}}</p>
+                        <p>{{review_content}}</p>
+                        {{!-- <p>Rating: {{convertToStars rating}}</p> --}}
+                        {{/each}}
+                        <h3>Burgers</h3>
+                        {{#each burgers}}
+                        <p>{{burger_name}}</p>
+                        <p>${{total_cost}}</p>
+                        {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
