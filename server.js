@@ -13,22 +13,6 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const hbs = exphbs.create({ helpers });
 
-// Configure disk storage for multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/images/'); // Specify the directory where files will be stored
-  },
-  filename: function (req, file, cb) {
-    const filename = req.body.burger_name + '-' + Date.now(); // Adjust the filename as per your requirement
-    cb(null, filename);
-  }
-});
-
-const upload = multer({ storage: storage });
-
-// Add the Multer middleware to handle file uploads
-app.use(upload.single('image')); // Assuming 'image' is the name of the input field for uploading images - need to confirm
-
 // session config
 const sess = {
   secret: 'Super secret secret',

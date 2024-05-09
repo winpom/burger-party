@@ -21,7 +21,8 @@ router.get('/', async (req, res) => {
       },
       include: [
         { model: Burger, include: [{ model: Restaurant }] } // Include the burger being reviewed and its associated restaurant
-      ]
+      ],
+      order: [['createdAt', 'DESC']]
     });
 
     // Convert user data and review data to plain JavaScript objects
