@@ -165,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check if the clicked element is a delete button
         if (event.target.classList.contains('deleteBtn')) {
             // Get the review ID from the dataset attribute
-            const reviewId = event.target.dataset.postId;
+            const reviewId = event.target.dataset.reviewId;
+            // console.log(reviewId)
 
             // Ask for confirmation before deletion
             const isConfirmed = confirm('Are you sure you want to delete this review?');
