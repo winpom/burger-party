@@ -42,7 +42,7 @@ router.get('/:id', async (req, res) => {
     // Fetch the user data by its ID, including associated reviews
     const userId = req.params.id;
     const userData = await User.findByPk(req.params.id, {
-      include: [{ model: Review }],
+      include: [{ model: Review },],
     });
 
     if (!userData) {
