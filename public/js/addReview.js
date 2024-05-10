@@ -187,3 +187,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('new-review-form');
+    const submitButton = document.getElementById('submitReviewBtn');
+
+    submitButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Get the form inputs
+        const rating = document.getElementById('rating').value;
+        const restaurantId = document.getElementById('restaurant_id').value;
+        const burgerId = document.getElementById('burger_id').value;
+        const reviewContent = document.getElementById('review_content').value;
+
+        // Check if any of the required fields are left blank
+        if (!rating || !restaurantId || !burgerId || !reviewContent) {
+            alert('Please fill out all required fields.');
+            return; // Stop further execution
+        }
+
+        // If all required fields are filled out, submit the form
+        form.submit();
+    });
+});

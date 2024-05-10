@@ -17,15 +17,9 @@ const upload = multer({ storage: storage })
 
 //multer 
 router.post('/', upload.single('uploaded_file'), async function (req, res) {
-  // console.log(req.file, req.body)
   try {
     
     const { rating, restaurant_id, burger_id, review_content } = req.body;
-    // console.log(req.body)
-    // console.log('rating', rating)
-    // console.log('restarant id',restaurant_id)
-    // console.log('burger id', burger_id)
-    // console.log('review', review_content)
 
     // Create a new review with the provided title, content, and associated IDs
     const newReview = await Review.create({
@@ -37,7 +31,6 @@ router.post('/', upload.single('uploaded_file'), async function (req, res) {
       // Add the filename of the uploaded image to the database
       image: req.file ? req.file.filename : null,
     });
-    // res.status(200).json(newReview);
     res.redirect('/dashboard')
   } catch (err) {
     console.log(err);
