@@ -38,18 +38,14 @@ router.get('/:id', async (req, res) => {
 // Route to create a new burger
 router.post('/', async (req, res) => {
   try {
-    console.log('burger post', req.body)
     // Create a new burger with the provided name and cost
     const burgerData = await Burger.create({
       burger_name: req.body.burger_name,
       total_cost: req.body.total_cost,
       restaurant_id: req.body.restaurant_id
     });
-    console.log('string', burgerData)
     res.status(200).json(burgerData);
   } catch (err) {
-    console.log('testing line 52')
-    console.log(err)
     res.status(400).json(err);
   }
 });
