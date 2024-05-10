@@ -32,8 +32,6 @@ a {
   justify-content: space-evenly;
 }
 
-
-
 .review {
   margin-left: 40px;
   padding: 10px;
@@ -131,7 +129,6 @@ main {
 
 /* Created structure on the login.handlebar added the section #loginwidget, could not move login form without breaking the form*/
 #loginwidget {
-  
 }
 
 .wrapper .title-text {
@@ -348,7 +345,6 @@ textarea {
   /* resize: vertical; */
 }
 
-
 .post-username {
   font-weight: bold;
   font-size: 1em;
@@ -392,11 +388,31 @@ textarea {
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-  margin: 0 0 10px 0;
+  margin: 10px 0;
   background-color: #0073e6;
   padding: 15px;
   border-radius: var(--border-radius);
   filter: drop-shadow(0px 5px 5px var(--dark));
+}
+
+.deleteBtn {
+  width: 25px;
+}
+
+.dashreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 500px;
+  border: solid 2px black;
+  margin: 5px 0;
+}
+
+#transformimg {
+  max-height: 300px;
+  max-width: 300px;
 }
 
 .user {
@@ -462,20 +478,6 @@ img {
   flex-wrap: wrap;
   justify-content: space-between; /* Adjusted justify-content property */
   margin: 10px auto auto auto;
-}
-
-.delete-btn {
-  background-color: var(--light);
-  color: var(--dark);
-  padding: 5px 10px; /* Increase padding for better appearance */
-  border: 2px solid var(--dark);
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-size: 0.6em;
-  font-weight: bolder;
-  position: absolute;
-  right: 3px;
-  top: 65px;
 }
 
 /* CARDS */
