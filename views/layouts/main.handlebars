@@ -11,36 +11,37 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <div class="wrapper">
-      <div class="navbar">
-        <div class="navbar-start">
-          <h6 class="htext1" style="font-size: 20px">Welcome to</h6>
-          <h1 class="htext2" style="font-size: 40px">Burger Party</h1>
-        </div>
-        <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal px-1">
-            <li id="divone"><a class="link" href="/"> Home </a></li>
-            <li id="divone"><a class="link" href="/write-review">Write a Review</a></li>
-            <li id="divone"><a class="link" href="/dashboard">Dashboard</a></li>
-          </ul>
-        </div>
-        <div class="navbar-end">
-          {{#if loggedIn}}
-            <a class="btn" id="logout">Logout</a>
-          {{else}}
-            <a class="btn" href="/login">Login</a>
-          {{/if}}
-        </div>
+<body>
+  <div class="wrapper">
+    <header class="hero">
+      <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="/">Burger Party</a>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link" href="/write-review">Write a Review </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item active">
+                {{#if loggedIn}}
+                <a class="nav-link" id="logout">Logout</a>
+                {{else}}
+                <a class="nav-link" href="/login">Login</a>
+                {{/if}}
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
-<hr>
-      <main>
-        {{{body}}}
-      </main>
-      <footer>
-        <p>footer here</p>
-      </footer>
-    </div>
+    </header>
+
     <main>
       {{{body}}}
     </main>
