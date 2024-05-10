@@ -37,7 +37,8 @@ router.post('/', upload.single('uploaded_file'), async function (req, res) {
       // Add the filename of the uploaded image to the database
       image: req.file ? req.file.filename : null,
     });
-    res.status(200).json(newReview);
+    // res.status(200).json(newReview);
+    res.redirect('/dashboard')
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
