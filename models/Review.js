@@ -49,9 +49,6 @@ Review.init(
         review_content: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                len: [10]
-            }
         },
         // images
         image: {
