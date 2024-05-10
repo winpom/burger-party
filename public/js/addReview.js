@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     );
 
-
     function highlightStars(value) {
         stars.forEach(star => {
             const starValue = parseInt(star.getAttribute('data-value'));
@@ -154,11 +153,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("#rating").dataset.rating = value;
     }
 
-    const submitReviewButton = document.getElementById('submitReviewBtn');
-    if (submitReviewButton) {
-        submitReviewButton.addEventListener('click', async (event) => {
-        alert('clicked!')
-        })}
+    // const submitReviewButton = document.getElementById('submitReviewBtn');
+    // if (submitReviewButton) {
+    //     submitReviewButton.addEventListener('click', async (event) => {
+    //     })}
 
     // Review deletion
     document.addEventListener('click', async (event) => {

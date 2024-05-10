@@ -32,22 +32,9 @@
 
         <label class="form-label" for="review">Review</label>
         <textarea id="review_content" name="review_content" class="form-input"></textarea>
-
-        {{!-- <form action="/profile" method="post" enctype="multipart/form-data"> --}}
-            <input type="file" class="form-control-file" name="uploaded_file">
-            {{!-- <input type="submit" value="" class="btn"> --}}
-            {{!--
-        </form> --}}
+        
+        <input type="file" class="form-control-file" name="uploaded_file">
 
         <button id="submitReviewBtn" type="submit" class="btn">Submit</button>
     </form>
 </div>
-
-{{!--
-<form action="/api/review" enctype="multipart/form-data" method="post">
-    <div class="form-group">
-        <input type="file" class="form-control-file" name="uploaded_file">
-        <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
-        <input type="submit" value="Get me the stats!" class="btn btn-default">
-    </div>
-</form> --}}
