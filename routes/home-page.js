@@ -23,7 +23,8 @@ router.get('/', async (req, res) => {
       include: [
         { model: User }, // Include the user who wrote the review
         { model: Restaurant, include: [{ model: Burger }] } // Include the restaurant being reviewed and its associated burger
-      ]
+      ],
+      order: [['createdAt', 'DESC']]
     });
     const restaurantData = await Restaurant.findAll({
       include: [
