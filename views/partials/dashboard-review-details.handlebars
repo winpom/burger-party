@@ -1,13 +1,11 @@
 <section class="review">
     <button class="deleteBtn" id="deleteReviewBtn" data-review-id="{{id}}">X</button>
-    <a href="/restaurant/{{restaurant.id}}">
-        <h1>{{restaurant_name}}</h1>
-    </a>
-    <a href="/user/{{user.id}}">
-        <h2>{{user.username}}</h2>
+    <a href="/restaurant/{{restaurant.restaurant.id}}">
+        <h2>{{restaurant.restaurant_name}}</h2>
     </a>
     <p class="rating">{{convertToStars rating}}</p>
     <p class="post-date">{{format_date createdAt}}</p>
+    <p class="burger-name">{{burger.burger_name}}</p>
     {{#if image}}
     <img class="reviewed-burger" src="/uploads/{{image}}" alt="Burger Image">
     {{/if}}

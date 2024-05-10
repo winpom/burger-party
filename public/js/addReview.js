@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const restaurantSelect = document.getElementById('restaurant_id');
                 const restaurantId = restaurantSelect.value;
 
-                if (burgerName && burgerCost) {
+                if (burgerName) {
                     try {
                         const response = await fetch('/api/burger', {
                             method: 'POST',
