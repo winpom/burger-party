@@ -48,5 +48,35 @@
     "burger_name": "The Cali Burger",
     "total_cost": 5.43,
     "restaurant_id": 10
+  },
+  {
+    "burger_name": "The Texan",
+    "total_cost": 12.43,
+    "restaurant_id": 1
+  },
+  {
+    "burger_name": "Double-Double",
+    "total_cost": 6.32,
+    "restaurant_id": 3
+  },
+  {
+    "burger_name": "Double Cheeseburger",
+    "total_cost": 13.92,
+    "restaurant_id": 5
+  },
+  {
+    "burger_name": "BBQ Burger",
+    "total_cost": 17.43,
+    "restaurant_id": 7
+  },
+  {
+    "burger_name": "The Heartstopper",
+    "total_cost": 22.99,
+    "restaurant_id": 4
+  },
+  {
+    "burger_name": "Mushroom Burger",
+    "total_cost": 18.69,
+    "restaurant_id": 8
   }
 ]

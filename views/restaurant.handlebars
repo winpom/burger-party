@@ -4,8 +4,8 @@
   <p class="average-cost">Average Price: ${{restaurant.avgCost}}</p>
   <h3>Reviews:</h3>
   {{#each restaurant.reviews}}
-  <a href="/user/{{id}}">
-    <p>{{user.username}}</p>
+  <a href="/user/{{user.id}}">
+    <p>{{user.username}}</p></a>
     <p>{{format_date createdAt}}</p>
     <p>{{review_content}}</p>
     <p>Rating: {{convertToStars rating}}</p>
