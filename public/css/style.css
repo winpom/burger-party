@@ -32,9 +32,26 @@ a {
   justify-content: space-evenly;
 }
 
+.reviewed-burger {
+  width: 350px;
+}
+
 .review {
   margin-left: 40px;
+  margin-bottom: 10px;
   padding: 10px;
+  background-color: #90aead;
+  filter: drop-shadow(0px 5px 5px black)
+}
+
+.centered {
+  display: block;
+  margin: auto;
+}
+
+.reviews, .restaurants {
+  float: left;
+  width: 50%;
 }
 
 #writereview {

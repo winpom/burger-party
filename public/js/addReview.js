@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const restaurantSelect = document.getElementById('restaurant_id');
                 const restaurantId = restaurantSelect.value;
 
-                if (burgerName && burgerCost) {
+                if (burgerName) {
                     try {
                         const response = await fetch('/api/burger', {
                             method: 'POST',
@@ -94,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                restaurant_name: burgerName,
-                                location_name: burgerCost,
+                                burger_name: burgerName,
+                                total_cost: burgerCost,
                                 restaurant_id: restaurantId
                             })
                         });
@@ -153,18 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("#rating").dataset.rating = value;
     }
 
-    // const submitReviewButton = document.getElementById('submitReviewBtn');
-    // if (submitReviewButton) {
-    //     submitReviewButton.addEventListener('click', async (event) => {
-    //     })}
-
     // Review deletion
     document.addEventListener('click', async (event) => {
         // Check if the clicked element is a delete button
         if (event.target.classList.contains('deleteBtn')) {
             // Get the review ID from the dataset attribute
             const reviewId = event.target.dataset.reviewId;
-            // console.log(reviewId)
 
             // Ask for confirmation before deletion
             const isConfirmed = confirm('Are you sure you want to delete this review?');

@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
         user_id: req.session.user_id,
       },
       include: [
-        { model: Burger, include: [{ model: Restaurant }] } // Include the burger being reviewed and its associated restaurant
+        { model: Burger, include: [{ model: Restaurant }] }, { model: Restaurant }// Include the burger being reviewed and its associated restaurant
       ],
       order: [['createdAt', 'DESC']]
     });

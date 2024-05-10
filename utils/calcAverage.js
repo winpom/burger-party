@@ -7,11 +7,19 @@ const averageRating = (ratings) => {
 }
 
 const averageCost = (costs) => {
+    if (costs.length === 0) {
+        return 0; // or return some default value, depending on your requirements
+    }
+
+    console.log('Costs:', costs);
+    console.log('Length:', costs.length);
+
     let sumCost = 0;
     for (let i = 0; i < costs.length; i++) {
-        sumCost += costs[i].total_cost
+        const totalCost = parseFloat(costs[i].total_cost);
+        sumCost += totalCost;
     }
-    return sumCost/costs.length;
+    return sumCost / costs.length;
 }
 
 module.exports = { averageCost, averageRating };

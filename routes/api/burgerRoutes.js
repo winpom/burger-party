@@ -1,5 +1,5 @@
 const express = require('express');
-const { Burger, Restaurant, Review } = require('../../models');
+const { Burger } = require('../../models');
 const router = express.Router();
 
 // Route to find all burgers
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const burgerData = await Burger.findAll({
       // include: [{ model: Restaurant }, { model: Review }],
     });
-    
+
     res.status(200).json(burgerData);
   } catch (err) {
     res.status(500).json(err);
@@ -38,54 +38,20 @@ router.get('/:id', async (req, res) => {
 // Route to create a new burger
 router.post('/', async (req, res) => {
   try {
+    console.log('burger post', req.body)
     // Create a new burger with the provided name and cost
     const burgerData = await Burger.create({
-        burger_name: req.body.burger_name,
-        total_cost: req.body.total_cost,
-        restaurant_id: req.body.restaurant_id
+      burger_name: req.body.burger_name,
+      total_cost: req.body.total_cost,
+      restaurant_id: req.body.restaurant_id
     });
+    console.log('string', burgerData)
     res.status(200).json(burgerData);
   } catch (err) {
+    console.log('testing line 52')
+    console.log(err)
     res.status(400).json(err);
   }
 });
-
-// update a burger's name by its `id` value (not updating)
-// router.put('/:id', async (req, res) => {
-//   try {
-//     const burgerData = await Burger.update(req.body, {
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
-//     if (!burgerData[0]) {
-//       res.status(404).json({ message: 'No burger with this id!' });
-//       return;
-//     }
-//     res.status(200).json(burgerData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-// delete on burger by its `id` value (not deleting)
-// router.delete('/:id', async (req, res) => {
-//   try {
-//     const burgerData = await Burger.destroy({
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
-
-//     if (!burgerData) {
-//       res.status(404).json({ message: 'No burger found with that id!' });
-//       return;
-//     }
-
-//     res.status(200).json(burgerData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 module.exports = router;
