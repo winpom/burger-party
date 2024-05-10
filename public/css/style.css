@@ -32,11 +32,25 @@ a {
   justify-content: space-evenly;
 }
 
-
+.reviewed-burger {
+  width: 350px;
+}
 
 .review {
   margin-left: 40px;
   padding: 10px;
+}
+
+.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.reviews, .restaurants {
+  float: left;
+  width: 50%;
 }
 
 #writereview {
